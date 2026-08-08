@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
     paths:
+      - "vivamk_clearance_christmas.py"
+      - "booklet_config.json"
       - "vivamk_clearance_iframe.py"
       - "iframe_config.json"
       - ".github/workflows/deploy-pages.yml"
@@ -26,14 +28,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install dependencies
+      - name: Verify booklet Python syntax
+        run: python -m py_compile vivamk_clearance_christmas.py
+      - name: Install iframe dependencies
         run: pip install requests beautifulsoup4
       - name: Build iframe catalogue
         run: python vivamk_clearance_iframe.py --config iframe_config.json
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
