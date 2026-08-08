@@ -1,0 +1,15 @@
+{
+  "source_price_file": "Christmas_Sale_GBP1.pdf",
+  "output_folder": "christmas_booklet_output",
+  "cards_per_page": 6,
+  "request_delay_seconds": 0.30,
+  "base_url": "https://stevegiergiel.vivamknetwork.co.uk/",
+  "search_url_template": "https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q={sku}",
+  "order_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/christmas-sale.html",
+  "phone": "0771 304 5597",
+  "email": "steve@ezeget.com",
+  "opportunity_url": "https://ezeget.com",
+  "opportunity_phone": "07429 21 21 40",
+  "opportunity_art_file": "opportunity_back_cover.png",
+  "ezeget_logo_file": "ezeget_logo.png"
+}
