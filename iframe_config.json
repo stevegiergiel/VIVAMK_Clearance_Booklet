@@ -1,0 +1,14 @@
+{
+  "clearance_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/christmas-sale.html",
+  "site_output_folder": "site",
+  "page_title": "Steve & Jus Christmas Clearance Specials",
+  "phone": "0771 304 5597",
+  "email": "steve@ezeget.com",
+  "opportunity_url": "https://ezeget.com",
+  "opportunity_phone": "07429 21 21 40",
+  "description_max_chars": 180,
+  "request_delay_seconds": 0.20,
+  "max_pages": 10,
+  "iframe_height": 1100,
+  "github_pages_url": "https://stevegiergiel.github.io/VIVAMK_Clearance_Booklet/"
+}
