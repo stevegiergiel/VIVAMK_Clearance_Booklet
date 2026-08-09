@@ -1,0 +1,27 @@
+{
+  "canonical_python_filename": "vivamk_clearance_christmas.py",
+  "internal_version": "v1.05",
+  "verified_design": {
+    "holly": "Complete sprigs cropped directly from preferred_booklet_style_reference.png and placed proportionally (no stretching).",
+    "footer": "Dark-green/gold banner footer with approved holly, ordering URL and text-order phone.",
+    "padding": "Required booklet padding pages are designed THANK YOU / HOW TO ORDER pages; no blank padding pages before the back cover.",
+    "back_page": "opportunity_back_cover.png is mandatory and remains the physical last page.",
+    "cards_per_page": 6
+  },
+  "files": {
+    "Christmas_Sale_GBP1.pdf": "27d8ba3ee0f22bda796c3f09745c410f77bb8516329fa03d86cba209d385f3c1",
+    "README.md": "f713871972a426c41b7c97344d17b69bf96b97099210178f2b9ed102ea8500c7",
+    "booklet_config.json": "07883bb843709a9c21e5cef3b0f0f72ef96b709865c1c4ba33d6618eb902cf2c",
+    "ezeget_logo.png": "cfacd4169d4bc980dc70813513e888954b113c7f228ccea86381ea6628d0346e",
+    "opportunity_back_cover.png": "dfec0e092dd133bd56ef55a94ada0ddae08d3a0b51cd3d954d0673d09b39f6e3",
+    "preferred_booklet_style_reference.png": "ae0eea72aa050bad13303643fdabc8a4cfd6d5cbadc6bac90619aed68574d65f",
+    "preferred_holly_footer_right.png": "8b5e8bb03b0e113d8abb5bf8671db6d9a29b93ea088d23f4d9aa01973f3f1fc3",
+    "preferred_holly_footer_right_transparent.png": "c53219a870ef37bf972e1758d4710e62557bc6851ce785b796c2a57fbc2627fe",
+    "preferred_holly_top_left.png": "db33b1ed0636c8c6f97f87f58bd6355ed90ef7a1a3e1794a0a72cee17326e154",
+    "preferred_holly_top_left_transparent.png": "7e82c525e781fac3d5afea9eb57419528910422a6a6a1a1eff54240926938974",
+    "preferred_holly_top_right.png": "f8df970f4aab79a62cdf5cada4308604fa36868c4c1f2f60c93fd8e11d80521f",
+    "preferred_holly_top_right_transparent.png": "896de04c04e7ef8822b9ce39ae549e6e6710dae738812bdd932fd24f8ff4230f",
+    "requirements.txt": "4aa7aa0d2c109fad8aa502b604013d589245088a10f6600a654e263aef98ea4a",
+    "vivamk_clearance_christmas.py": "e2e54e230c78763a1153c6c36f40077bd95876b48fd3e9fe54a02491516bb7fe"
+  }
+}

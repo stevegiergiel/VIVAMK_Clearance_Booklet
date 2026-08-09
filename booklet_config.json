@@ -1,15 +1,17 @@
 {
   "source_price_file": "Christmas_Sale_GBP1.pdf",
   "output_folder": "christmas_booklet_output",
-  "cards_per_page": 6,
-  "request_delay_seconds": 0.30,
   "base_url": "https://stevegiergiel.vivamknetwork.co.uk/",
   "search_url_template": "https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q={sku}",
-  "order_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/christmas-sale.html",
+  "owner_display_name": "STEVE & JUS",
   "phone": "0771 304 5597",
   "email": "steve@ezeget.com",
-  "opportunity_url": "https://ezeget.com",
-  "opportunity_phone": "07429 21 21 40",
+  "cards_per_page": 6,
+  "request_delay_seconds": 0.35,
+  "intro_text": "Steve and Jus bring you special Christmas Offers at amazing prices. Once they are gone they are gone, so be quick to pick your favourites. Order as usual or text your requirements for speed to <b>0771 304 5597</b>. If you are using a phone number that I may not recognise, please add your name and postal address so that I can be sure to deliver to the right address.<br/><br/>If you are receiving this leaflet you are one of our top customers and we thank you sincerely for your valued custom through the years. If easier please email your orders to <b>steve@ezeget.com</b> remembering to state your name and postal address for clarification.",
   "opportunity_art_file": "opportunity_back_cover.png",
+  "pro_foliage_left_file": "preferred_holly_top_left_transparent.png",
+  "pro_foliage_right_file": "preferred_holly_top_right_transparent.png",
+  "pro_foliage_footer_file": "preferred_holly_top_right_transparent.png",
   "ezeget_logo_file": "ezeget_logo.png"
 }
