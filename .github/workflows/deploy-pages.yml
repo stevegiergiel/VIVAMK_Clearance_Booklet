@@ -1,53 +1,29 @@
-name: Build and deploy VivaMK iframe catalogue
-
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "vivamk_clearance_christmas.py"
-      - "booklet_config.json"
-      - "vivamk_clearance_iframe.py"
-      - "iframe_config.json"
-      - ".github/workflows/deploy-pages.yml"
-
+name: Build clearance iframe pages
+on: [workflow_dispatch]
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Verify booklet Python syntax
-        run: python -m py_compile vivamk_clearance_christmas.py
-      - name: Install iframe dependencies
-        run: pip install requests beautifulsoup4
-      - name: Build iframe catalogue
-        run: python vivamk_clearance_iframe.py --config iframe_config.json
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
+        with: {python-version: "3.12"}
+      - run: pip install -r requirements.txt
+      - run: |
+          python vivamk_clearance_iframe.py --config configs/christmas.json
+          python vivamk_clearance_iframe.py --config configs/mega_sale.json
+          python vivamk_clearance_iframe.py --config configs/pets.json
+          python vivamk_clearance_iframe.py --config configs/personalised.json
+          python vivamk_clearance_iframe.py --config configs/winter_warmers.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: site}
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
+    environment: {name: github-pages}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4

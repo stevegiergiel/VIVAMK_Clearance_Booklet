@@ -1,0 +1,85 @@
+{
+  "base_url": "https://stevegiergiel.vivamknetwork.co.uk/",
+  "search_url_template": "https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q={sku}",
+  "phone": "0771 304 5597",
+  "email": "steve@ezeget.com",
+  "owner_display_name": "STEVE & JUS",
+  "opportunity_url": "https://ezeget.com",
+  "opportunity_phone": "07429 21 21 40",
+  "ezeget_logo_file": "themes/shared/ezeget_logo.png",
+  "opportunity_art_file": "themes/shared/opportunity_back_cover.png",
+  "cards_per_page": 6,
+  "request_delay_seconds": 0.35,
+  "max_category_pages": 30,
+  "product_code": {
+    "label": "SKU",
+    "font_size_pt": 6.8,
+    "bold": true
+  },
+  "qr": {
+    "box_size": 10,
+    "sale_qr_size_mm": 24,
+    "sale_qr_caption": "SCAN TO VIEW THIS SALE",
+    "back_page_qr_url": "https://ezeget.com",
+    "back_page_qr_size_mm": 19.0,
+    "product_qr_enabled": false
+  },
+  "intro_title": "A SPECIAL THANK YOU",
+  "default_description": "Clearance special - limited stock while available.",
+  "padding_thanks_line": "in these clearance offers.",
+  "sale": {
+    "id": "pets",
+    "display_name": "Pets Related Items",
+    "source_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/petsale.html"
+  },
+  "order_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/petsale.html",
+  "header_title": "PETS SALE",
+  "header_subtitle": "Special offers for pets and pet lovers",
+  "cover_line1": "PETS",
+  "cover_line2": "SALE",
+  "cover_line3": "SPECIAL OFFERS",
+  "output_prefix": "pets_clearance",
+  "output_folder": "output/pets",
+  "intro_text": "Steve and Jus bring you pets related items at amazing clearance prices. Once they are gone they are gone, so be quick to pick your favourites. Order as normal using the paper order form or, for a faster service and to increase your chances of reserving favourite items before they sell out, text your requirements to <b>0771 304 5597</b>. If you are using a phone number that I may not recognise, please add your name and postal address.<br/><br/>Thank you sincerely for your valued custom through the years. If easier, email your order to <b>steve@ezeget.com</b>, remembering to state your name and postal address.",
+  "theme_assets": {
+    "header_left": "",
+    "header_right": "themes/pets/supplied_theme_graphic.png",
+    "footer_right": "",
+    "back_cover": "themes/shared/opportunity_back_cover.png",
+    "footer_left": "themes/pets/supplied_theme_graphic.png"
+  },
+  "data_source": {
+    "mode": "category",
+    "price_pdf": "",
+    "generate_price_audit_pdf": true
+  },
+  "theme": {
+    "colours": {
+      "primary": "#174B48",
+      "secondary": "#286A65",
+      "accent": "#D8A84B",
+      "sale": "#B54E3D",
+      "sale_dark": "#793126",
+      "cream": "#FFF8E9",
+      "pale": "#EAF4F1",
+      "ink": "#202020"
+    },
+    "assets": {
+      "header_left": "",
+      "header_right": "themes/pets/supplied_theme_graphic.png",
+      "footer_right": "",
+      "back_cover": "themes/shared/opportunity_back_cover.png",
+      "footer_left": "themes/pets/supplied_theme_graphic.png"
+    }
+  },
+  "iframe_path": "pets",
+  "layout": {
+    "mask_source_sale_badge": false
+  },
+  "theme_asset_layout": {
+    "header_max_width_mm": 22,
+    "header_max_height_mm": 22,
+    "footer_max_width_mm": 20,
+    "footer_max_height_mm": 20
+  }
+}
