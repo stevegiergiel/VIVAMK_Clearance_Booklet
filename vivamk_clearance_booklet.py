@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# VIVAMK CLEARANCE BOOKLET ENGINE VERSION v2.04
+# VIVAMK CLEARANCE BOOKLET ENGINE VERSION v2.08
 # Updated: 2026-08-09 16:55 +0100
 # Changes: Generic config-driven engine based on approved Christmas v1.11 visual baseline.
 # Changes: Sale wording, URLs, filenames, professional left/right/footer decorations and colours are config parameters.
@@ -247,6 +247,8 @@ class SaleRow:
     image_file: str = ""
     qr_file: str = ""
     availability: str = ""
+    stock_status: str = "active"
+    sold_out_since: str = ""
 
 
 # -----------------------------
@@ -850,6 +852,57 @@ def wrap_text(c: canvas.Canvas, text: str, font: str, size: float, max_width: fl
     return lines
 
 
+
+def merge_monitor_state(rows: list[SaleRow], state_file: Path | None) -> list[SaleRow]:
+    """Merge retained SOLD OUT products from monitor state into fresh live rows."""
+    for r in rows:
+        r.stock_status = "active"
+        r.sold_out_since = ""
+
+    if not state_file:
+        return rows
+    state_file = Path(state_file)
+    if not state_file.exists():
+        return rows
+
+    state = json.loads(state_file.read_text(encoding="utf-8"))
+    products = state.get("products", {})
+    active_keys = {(r.sku or r.product_url or r.product).strip() for r in rows}
+
+    for key, item in products.items():
+        if item.get("status") != "sold_out":
+            continue
+        identity = (item.get("sku") or item.get("product_url") or item.get("product") or key).strip()
+        if identity in active_keys:
+            continue
+
+        image_file = item.get("image_file", "")
+        if image_file and not Path(image_file).is_absolute():
+            image_file = str((Path(__file__).resolve().parent / image_file).resolve())
+        if not image_file or not Path(image_file).exists():
+            print(f"[WARN] SOLD OUT item {identity} has no retained image; omitted.")
+            continue
+
+        rows.append(SaleRow(
+            sku=item.get("sku", ""),
+            product=item.get("product", ""),
+            was=item.get("was", ""),
+            now=item.get("now", ""),
+            saving=item.get("saving", ""),
+            percent=item.get("percent", ""),
+            product_url=item.get("product_url", ""),
+            description=item.get("description", ""),
+            image_url=item.get("image_url", ""),
+            image_file=image_file,
+            qr_file="",
+            availability="sold_out",
+            stock_status="sold_out",
+            sold_out_since=item.get("sold_out_since", ""),
+        ))
+    return rows
+
+
+
 def draw_image_contain(c: canvas.Canvas, image_file: str, x: float, y: float, w: float, h: float):
     if not image_file or not Path(image_file).exists():
         c.setFillColor(PALE_GREEN)
@@ -869,6 +922,24 @@ def draw_image_contain(c: canvas.Canvas, image_file: str, x: float, y: float, w:
     dy = y + (h - dh) / 2
     c.drawImage(image_file, dx, dy, dw, dh, preserveAspectRatio=True, mask="auto")
     return dx, dy, dw, dh
+
+
+def draw_sold_out_overlay(c: canvas.Canvas, x: float, y: float, w: float, h: float):
+    """Add a prominent diagonal SOLD OUT ribbon over the product image area."""
+    c.saveState()
+    c.translate(x + w/2, y + h/2)
+    c.rotate(18)
+    ribbon_h = min(11.5*mm, h*0.34)
+    ribbon_w = min(w*1.12, 68*mm)
+    c.setFillColor(colors.HexColor("#B5121B"))
+    c.setStrokeColor(colors.white)
+    c.setLineWidth(1.2)
+    c.roundRect(-ribbon_w/2, -ribbon_h/2, ribbon_w, ribbon_h, 2*mm, stroke=1, fill=1)
+    c.setFillColor(colors.white)
+    font_size = 16 if ribbon_h >= 10*mm else 13
+    c.setFont("Helvetica-Bold", font_size)
+    c.drawCentredString(0, -font_size*0.32, "SOLD OUT")
+    c.restoreState()
 
 
 def draw_product_card(c: canvas.Canvas, row: SaleRow, x: float, y: float, w: float, h: float):
@@ -977,6 +1048,9 @@ def draw_product_card(c: canvas.Canvas, row: SaleRow, x: float, y: float, w: flo
     c.setFillColor(colors.HexColor("#333333"))
     c.setFont("Helvetica-Bold" if PRODUCT_CODE_BOLD else "Helvetica", PRODUCT_CODE_FONT_SIZE)
     c.drawRightString(right, panel_y + 2.1 * mm, f"{PRODUCT_CODE_LABEL} {row.sku}")
+
+    if getattr(row, "stock_status", "active") == "sold_out":
+        draw_sold_out_overlay(c, x + pad, image_y, w - 2 * pad, image_h)
 
 
 def draw_sale_qr(c: canvas.Canvas, width: float, y: float):
@@ -1303,6 +1377,7 @@ def main():
     ap.add_argument("--refresh", action="store_true", help="Refresh website data")
     ap.add_argument("--cards-per-page", type=int, choices=[4,6], default=None)
     ap.add_argument("--delay", type=float, default=None)
+    ap.add_argument("--state-file", type=Path, default=None, help="Monitor state file containing retained SOLD OUT products")
     args=ap.parse_args()
 
     cfg=load_config(args.config)
@@ -1330,6 +1405,8 @@ def main():
         rows=enrich_category_rows(rows,cache_dir,delay=delay)
     else:
         raise ValueError(f"Unsupported data_source.mode: {DATA_SOURCE_MODE}")
+
+    rows = merge_monitor_state(rows, args.state_file)
 
     if not rows:
         raise RuntimeError("No discounted products with usable images remain; nothing was published.")

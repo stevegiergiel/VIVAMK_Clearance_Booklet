@@ -1,0 +1,15 @@
+{
+  "version": "v2.15",
+  "base": "v2.14 SYSTEM Git test / v2.13 working SYSTEM task",
+  "features": {
+    "daily_christmas_pdf_vs_live_audit": true,
+    "heartbeat_audit_summary": true,
+    "price_mismatch_detection": true,
+    "image_failure_detection": true,
+    "daily_comparison_state": true,
+    "dated_audit_csv": true,
+    "migration_confidence_streak": true,
+    "christmas_operational_source": "pdf",
+    "audit_changes_trigger_reprint": false
+  }
+}

@@ -1,0 +1,5 @@
+email_config.ini
+monitor_state/
+monitor_logs/
+monitor_tmp/
+monitor_cache/

@@ -1,0 +1,15 @@
+CHRISTMAS PDF vs LIVE CATEGORY AUDIT
+
+PDF source items: 69
+Live category items: 83
+Live products with usable images/details: 83
+
+In both and usable: 62
+In both but no usable image: 0
+PDF only: 7
+Live only: 21
+
+This audit does NOT change the Christmas booklet source.
+Use repeated clean comparisons to decide when Christmas can safely move to category mode.
+
+CSV: F:\VIVAMK_Clearance_Booklet\output\christmas\live_audit\christmas_pdf_vs_live_category.csv

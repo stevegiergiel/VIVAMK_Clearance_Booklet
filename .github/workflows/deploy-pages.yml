@@ -1,16 +1,29 @@
 name: Build clearance iframe pages
-on: [workflow_dispatch]
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "configs/**"
+      - "vivamk_clearance_iframe.py"
+      - "vivamk_clearance_booklet.py"
+      - ".github/workflows/deploy-pages.yml"
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12"}
+        with:
+          python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: |
           python vivamk_clearance_iframe.py --config configs/christmas.json
@@ -20,10 +33,13 @@ jobs:
           python vivamk_clearance_iframe.py --config configs/winter_warmers.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
-        with: {path: site}
+        with:
+          path: site
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: {name: github-pages}
+    environment:
+      name: github-pages
     steps:
       - uses: actions/deploy-pages@v4

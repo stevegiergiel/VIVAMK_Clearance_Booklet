@@ -1,26 +1,38 @@
 {
-  "version": "v2.04",
-  "checks": {
-    "engine_syntax": "passed",
-    "individual_product_qr": "disabled",
-    "front_sale_qr": "retained",
-    "back_ezeget_qr": "retained",
-    "product_urls_for_iframe": "retained"
+  "version": "v2.08",
+  "features": {
+    "sold_out_overlay_print": true,
+    "sold_out_overlay_iframe": true,
+    "persistent_known_good_images": true,
+    "sold_out_retention_days": 14,
+    "automatic_back_in_stock_recovery": true,
+    "christmas_live_category_audit": true,
+    "christmas_operational_source_unchanged": "pdf"
   },
   "files": {
-    ".github/workflows/deploy-pages.yml": "d40a37c7e55a909ce7ecc6970a69ebf7a6bcb00f2b272224dda7f1705b2ada71",
+    ".github/workflows/deploy-pages.yml": "1ea0813fe806ce874fcfc157da0cb3505ff19d107a5204911dbccd69e7295a2c",
+    ".gitignore": "b8512e234ff53f7e7f9f3ab4c4ed6c29d68d1544460d61e6ccc1c82c725e085b",
+    "DAILY_MONITOR_README.txt": "b46cb5c0119a332728a3ec9dd90e29639a74fea13ad19f9c74c0190c9b649a39",
     "README.md": "818ca50d6742768fd6e551e9abbe250816e17633a89398dd3e8505cfa538a608",
     "REFERENCE_christmas_v1_11.py": "f81ba74c5f1cb022265863c446b015ad1b7e440bd4174a9f47e7c1107dae821e",
+    "compare_christmas_live.py": "463573b9e66db5243165ad2c6918c849df55af7cf77d139e1063961a368cdc01",
     "configs/christmas.json": "fe7f3ec2373119c798d5ca238b079a6e36818ea6f19ed7a664ce4ebc870627f1",
     "configs/mega_sale.json": "3924e7ef5bfa587e0afcf5028f41b5c213807500ddbee0be65d3832681849df7",
     "configs/personalised.json": "40c700e5e9072ab2d84d76fba4707d1cccdfb19a38c7d5f9995f7a8de233f1ae",
     "configs/pets.json": "5bf96ed8369a88aa98e1ed0016ba69be01aa43bba30db796a489d78a4b92d364",
     "configs/winter_warmers.json": "91c65b4fffd1ddf64ab643161ce8969764c829ae16fc8e57f6a3bf9fe832fef5",
+    "daily_monitor_config.json": "052cdb816752058ce21af010fe140c5000b126ae7875e38e2e69166df62a9370",
     "data/Christmas_Sale_GBP1.pdf": "27d8ba3ee0f22bda796c3f09745c410f77bb8516329fa03d86cba209d385f3c1",
+    "email_config.ini": "<credential file included; checksum intentionally omitted>",
+    "install_daily_task_9am.bat": "123eaca9853b76a96ad800518b49c01c75bf8a88ba9d0500c18037bf1adea75c",
     "requirements.txt": "defc247ce559cade4c07782895b30986a15d9aa00f8275ff67472031fbf0a77b",
     "run_all_booklets.bat": "7b00e0c72cd8ec15b167714599b04dc42608594173a2f4bb77f11494a459a366",
     "run_all_iframes.bat": "1af38c2e8389bda1f8d44747cc5f0e16492d7d6c3fdb401be7b442838e33ac90",
+    "run_christmas_live_audit.bat": "085d64b9a66ae4f715b2bf0e4ee2bb2009473ddea0f891844a8a5e72fba03ea7",
+    "run_daily_catalogue_check.bat": "faa55a78409c8bc300e1dea454930046bd95c957e28b3b2240802ac73457b2d9",
     "self_test.py": "e0e2133215332b6c811ded8bfc47040803ce7a164bc9fa29c6d170f74d3785d2",
+    "test_monitor_email.bat": "0d6edaea4de294a46cf5d115ffd879b3d063cad7bec644e878c09a12d7193d89",
+    "test_monitor_email.py": "d19974fe9ab857ea53dd7c9a26796cde40397edfcfc7c9962671c739980fd64c",
     "themes/christmas/footer_right.png": "896de04c04e7ef8822b9ce39ae549e6e6710dae738812bdd932fd24f8ff4230f",
     "themes/christmas/header_left.png": "7e82c525e781fac3d5afea9eb57419528910422a6a6a1a1eff54240926938974",
     "themes/christmas/header_right.png": "896de04c04e7ef8822b9ce39ae549e6e6710dae738812bdd932fd24f8ff4230f",
@@ -42,7 +54,8 @@
     "themes/winter_warmers/header_left.png": "233b15fb55738a37f87636525f68596235df7f45e087769242b12c49c904d4bb",
     "themes/winter_warmers/header_right.png": "9a6f48cc77cfc9e89d1af275f7ec4b594367d36f6f91ed25fca7681113199744",
     "themes/winter_warmers/supplied_theme_graphic.png": "a8a4487cc2fa9f68d149c8c5762284bb04abf77c3e9db9ecba85483eda2ad2d8",
-    "vivamk_clearance_booklet.py": "e291cb4200c5494f797edfe824605a1c63efb1d2af1d036754885e6f0b53a309",
-    "vivamk_clearance_iframe.py": "9f0c17073333433c0e772420fe2c9163f11ad597e1f5fd9a1af5a507457aa000"
+    "vivamk_clearance_booklet.py": "c024aee0d7420ccb1c7e3a1209c631688c66ec0d5583c7237e3b5b269c59cafa",
+    "vivamk_clearance_iframe.py": "d7226b71583184d6423f6ec5afd13efac7dc8fa3b968a8475cbf0f3378159ec1",
+    "vivamk_daily_monitor.py": "9f55a4098000d5399d41354a091acf98ac3da14f10634a83b7c413724561a8ef"
   }
 }

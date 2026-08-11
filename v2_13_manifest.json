@@ -1,0 +1,8 @@
+{
+  "version": "v2.13",
+  "fix": "Removed invalid ServiceAccount XML LogonType for SYSTEM principal",
+  "principal": {
+    "user_sid": "S-1-5-18",
+    "run_level": "HighestAvailable"
+  }
+}

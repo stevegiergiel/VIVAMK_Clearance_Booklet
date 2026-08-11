@@ -1,0 +1,9 @@
+{
+  "version": "v2.12",
+  "fixes": [
+    "No pre-query or pre-delete",
+    "Direct schtasks /Create /F",
+    "schtasks create/query executed through cmd.exe",
+    "stderr merged into normal output to avoid NativeCommandError"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "v2.11",
+  "base": "v2.08 SOLD OUT + Christmas audit",
+  "features": {
+    "explicit_task_scheduler_xml": true,
+    "system_account": true,
+    "wake_to_run": true,
+    "start_when_available": true,
+    "restart_interval": "PT15M",
+    "restart_count": 3,
+    "execution_time_limit": "PT4H",
+    "multiple_instances": "IgnoreNew",
+    "schtasks_verification": true,
+    "safe_missing_task_cleanup": true
+  }
+}
