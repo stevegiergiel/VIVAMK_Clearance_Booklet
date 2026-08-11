@@ -1,0 +1,13 @@
+{
+  "version": "v2.16",
+  "base": "v2.15 DAILY CHRISTMAS AUDIT",
+  "changes": {
+    "system_git_isolated_from_user_git": true,
+    "normal_user_origin": "HTTPS (left untouched by monitor)",
+    "system_push_transport": "explicit SSH URL + process-local GIT_SSH_COMMAND",
+    "repo_core_ssh_command_required": false,
+    "scheduled_task_reinstall_required": false,
+    "christmas_daily_audit_retained": true,
+    "sold_out_iframe_automation_retained": true
+  }
+}

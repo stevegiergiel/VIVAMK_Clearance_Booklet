@@ -1,0 +1,47 @@
+VIVAMK CLEARANCE GENERIC v2.16 - SYSTEM GIT ISOLATION
+=========================================================
+
+Purpose
+-------
+Keep Steve's normal GitHub access and unattended SYSTEM publishing completely separate.
+
+Normal user Git:
+  origin remains HTTPS
+  no repo-wide core.sshCommand is required
+  normal Git clients continue using Steve's usual GitHub credentials
+
+Scheduled SYSTEM monitor:
+  uses the existing repo-specific SSH deploy key ONLY for the push subprocess
+  GIT_SSH_COMMAND exists only inside that subprocess
+  pushes explicitly to:
+    git@github.com:stevegiergiel/VIVAMK_Clearance_Booklet.git
+  does not modify origin
+  does not modify core.sshCommand
+
+Therefore a SYSTEM-only private key can no longer make the normal user Git client
+try to read that key.
+
+v2.15 daily Christmas PDF-vs-live auditing is retained unchanged.
+
+INSTALL
+-------
+Copy the v2.16 files over the existing project folder, preserving:
+  email_config.ini
+  monitor_state\
+  monitor_cache\
+  output\
+  themes\
+  the SYSTEM SSH key files under C:\ProgramData\VivaMK\ssh\
+
+Do NOT change the Git remote back to SSH.
+
+Verify the normal repo configuration from the project folder:
+  git remote -v
+  git config --get core.sshCommand
+
+Expected:
+  origin uses https://github.com/stevegiergiel/VIVAMK_Clearance_Booklet.git
+  core.sshCommand returns no value
+
+The existing 09:00 SYSTEM scheduled task continues to launch the same
+run_daily_catalogue_check.bat, so no task reinstall is required.

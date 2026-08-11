@@ -1,6 +1,10 @@
 {
   "git": {
-    "enabled": true
+    "enabled": true,
+    "system_push_url": "git@github.com:stevegiergiel/VIVAMK_Clearance_Booklet.git",
+    "system_ssh_executable": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+    "system_ssh_private_key": "C:\\ProgramData\\VivaMK\\ssh\\github_deploy_ed25519",
+    "system_ssh_known_hosts": "C:\\ProgramData\\VivaMK\\ssh\\known_hosts"
   },
   "safety": {
     "verification_pause_seconds": 3,

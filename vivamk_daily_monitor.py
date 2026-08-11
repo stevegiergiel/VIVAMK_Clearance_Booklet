@@ -63,8 +63,15 @@ def log(msg: str, lines: list[str]) -> None:
     lines.append(line)
 
 
-def run(cmd: list[str], *, check=True) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, check=check)
+def run(cmd: list[str], *, check=True, env: dict[str, str] | None = None) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        cmd,
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=check,
+        env=env,
+    )
 
 
 def load_engine():
@@ -347,7 +354,48 @@ def git_publish(affected_iframe_paths: list[str], settings: dict[str, Any], line
 
     message = "Daily catalogue monitor: refresh affected iframe pages"
     run(["git", "commit", "-m", message])
-    run(["git", "push"])
+
+    # IMPORTANT: isolate unattended SYSTEM authentication from Steve's normal Git.
+    #
+    # - Normal/user runs use the repository's ordinary origin (HTTPS).
+    # - SYSTEM runs use an explicit SSH URL and a process-local GIT_SSH_COMMAND.
+    # - We DO NOT set repo-level core.sshCommand and DO NOT change origin.
+    # This prevents the SYSTEM-only private key from locking the user's Git client out.
+    is_system = os.environ.get("USERNAME", "").strip().upper() == "SYSTEM"
+
+    if is_system:
+        push_url = git_cfg.get(
+            "system_push_url",
+            "git@github.com:stevegiergiel/VIVAMK_Clearance_Booklet.git",
+        ).strip()
+        ssh_exe = git_cfg.get(
+            "system_ssh_executable",
+            r"C:\Windows\System32\OpenSSH\ssh.exe",
+        ).strip()
+        private_key = git_cfg.get(
+            "system_ssh_private_key",
+            r"C:\ProgramData\VivaMK\ssh\github_deploy_ed25519",
+        ).strip()
+        known_hosts = git_cfg.get(
+            "system_ssh_known_hosts",
+            r"C:\ProgramData\VivaMK\ssh\known_hosts",
+        ).strip()
+
+        git_env = os.environ.copy()
+        git_env["GIT_SSH_COMMAND"] = (
+            f'"{ssh_exe}" '
+            f'-i "{private_key}" '
+            f'-o IdentitiesOnly=yes '
+            f'-o UserKnownHostsFile="{known_hosts}" '
+            f'-o StrictHostKeyChecking=yes'
+        )
+
+        log("Git publish: using isolated SYSTEM deploy key.", lines)
+        run(["git", "push", push_url, "HEAD:main"], env=git_env)
+    else:
+        log("Git publish: using normal user origin.", lines)
+        run(["git", "push", "origin", "main"])
+
     log("Affected iframe pages committed and pushed.", lines)
     return "Affected iframe pages were committed and pushed. GitHub Pages will redeploy automatically."
 
