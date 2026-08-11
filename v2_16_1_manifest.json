@@ -1,0 +1,11 @@
+{
+  "version": "v2.16.1",
+  "base": "v2.16 SYSTEM Git isolation",
+  "changes": {
+    "correct_system_git_test_false_failure": true,
+    "git_stderr_is_informational": true,
+    "native_exit_code_controls_pass_fail": true,
+    "cleanup_test_file_utility": true,
+    "production_monitor_logic_changed_from_v2_16": false
+  }
+}

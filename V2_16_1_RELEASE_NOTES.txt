@@ -1,0 +1,20 @@
+V2.16.1
+=======
+
+This is a test/reporting correction on top of v2.16.
+
+The production v2.16 SYSTEM isolation design is unchanged.
+
+Fixed:
+- Git push progress written to stderr is no longer mistaken for a failed push.
+- The test now determines SUCCESS/FAIL strictly from git's exit code.
+- The test verifies normal origin remains HTTPS and core.sshCommand is unset.
+- Added cleanup_v216_system_git_test.bat.
+  It removes/stages ONLY site/system_v216_isolation_test.txt.
+  It deliberately does not commit or push.
+
+After copying these files into the project folder:
+1. run run_v216_system_isolated_git_test.bat as Administrator
+2. expect a final SUCCESS line
+3. run cleanup_v216_system_git_test.bat
+4. review git status before your normal commit/push
