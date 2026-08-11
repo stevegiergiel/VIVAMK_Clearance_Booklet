@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.08
+# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.17
 import argparse, html, importlib.util, sys
 from pathlib import Path
 
@@ -37,11 +37,37 @@ def main():
 
     rows = m.merge_monitor_state(rows, args.state_file)
 
-    cards = []
+    # Never publish an empty/no-image iframe card.
+    #
+    # ACTIVE:
+    #   keep only if we have either a live image URL or a known-good local image.
+    #
+    # SOLD OUT:
+    #   keep only if the monitor has a known-good cached image from when the
+    #   product was previously ACTIVE. This preserves the intentional SOLD OUT
+    #   experience without inventing a product card for a PDF-only/stale SKU
+    #   that was never successfully captured.
+    publishable_rows = []
     for r in rows:
+        sold_out = getattr(r, 'stock_status', 'active') == 'sold_out'
+        local_image_ok = bool(r.image_file and Path(r.image_file).exists())
+        live_image_ok = bool((r.image_url or '').strip())
+
+        if sold_out:
+            if local_image_ok:
+                publishable_rows.append(r)
+        elif live_image_ok or local_image_ok:
+            publishable_rows.append(r)
+
+    cards = []
+    for r in publishable_rows:
         url = m.personal_vivamk_url(r.product_url)
         sold_out = getattr(r, 'stock_status', 'active') == 'sold_out'
-        if sold_out and r.image_file and Path(r.image_file).exists():
+        local_image_ok = bool(r.image_file and Path(r.image_file).exists())
+
+        # Embed the cached file when SOLD OUT, or whenever the live URL is absent.
+        # Otherwise prefer the live CDN image URL for smaller HTML.
+        if local_image_ok and (sold_out or not (r.image_url or '').strip()):
             import base64, mimetypes
             mime = mimetypes.guess_type(r.image_file)[0] or 'image/jpeg'
             img = 'data:' + mime + ';base64,' + base64.b64encode(Path(r.image_file).read_bytes()).decode('ascii')

@@ -1,0 +1,19 @@
+V2.17 - IFRAME NO-IMAGE GUARD
+
+Fixes blank iframe cards caused by stale/PDF-only products that have no usable
+live image and no previously cached known-good image.
+
+Rules:
+- ACTIVE with live image URL -> include.
+- ACTIVE with known-good cached image -> include.
+- SOLD OUT with known-good cached image -> include with SOLD OUT treatment.
+- SOLD OUT/PDF-only item with no known-good image -> omit.
+- Never invent a blank product card.
+
+Christmas SKU 90343 is the motivating example:
+it exists in the PDF, but the live Christmas category does not contain it and
+there is no usable cached image, so the iframe now omits it just as the paper
+booklet does.
+
+This does not switch Christmas to scrape mode. That decision remains governed
+by the daily PDF-vs-live audit.

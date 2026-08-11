@@ -1,0 +1,7 @@
+{
+  "version": "v2.17",
+  "change": "iframe no-image guard",
+  "christmas_90343_expected": "omitted",
+  "sold_out_with_cached_image": "retained",
+  "christmas_source_mode": "PDF for now"
+}

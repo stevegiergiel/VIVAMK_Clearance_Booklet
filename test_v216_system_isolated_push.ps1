@@ -11,76 +11,57 @@ function Log($Message) {
     Add-Content -Path $Log -Value $line
 }
 
-function Quote-NativeArg {
-    param([string]$Arg)
-
-    if ($Arg -match '[\s"]') {
-        # Windows command-line quoting suitable for git.exe arguments here.
-        $escaped = $Arg -replace '(\\*)"', '$1$1\"'
-        $escaped = $escaped -replace '(\\+)$', '$1$1'
-        return '"' + $escaped + '"'
-    }
-    return $Arg
-}
-
-function Run-Git {
+function Run-Native {
     param(
+        [Parameter(Mandatory=$true)][string]$FilePath,
         [Parameter(Mandatory=$true)][string[]]$Arguments,
-        [string]$GitSshCommand = ""
+        [hashtable]$Environment = @{}
     )
 
-    $outFile = Join-Path $env:TEMP ("vivamk_git_stdout_" + [guid]::NewGuid().ToString("N") + ".txt")
-    $errFile = Join-Path $env:TEMP ("vivamk_git_stderr_" + [guid]::NewGuid().ToString("N") + ".txt")
-    $oldSsh = $env:GIT_SSH_COMMAND
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $FilePath
+    $psi.WorkingDirectory = $Root
+    $psi.UseShellExecute = $false
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+    $psi.CreateNoWindow = $true
 
-    try {
-        if ($GitSshCommand) {
-            $env:GIT_SSH_COMMAND = $GitSshCommand
-        } else {
-            Remove-Item Env:\GIT_SSH_COMMAND -ErrorAction SilentlyContinue
-        }
-
-        # PowerShell 5.1 Start-Process flattens ArgumentList. Build one correctly
-        # quoted command-line string so multi-word commit messages stay one argument.
-        $argLine = (($Arguments | ForEach-Object { Quote-NativeArg $_ }) -join ' ')
-
-        $proc = Start-Process `
-            -FilePath "git.exe" `
-            -ArgumentList $argLine `
-            -WorkingDirectory $Root `
-            -NoNewWindow `
-            -Wait `
-            -PassThru `
-            -RedirectStandardOutput $outFile `
-            -RedirectStandardError $errFile
-
-        if (Test-Path $outFile) {
-            Get-Content $outFile | ForEach-Object { if ($_ -ne "") { Log "$_" } }
-        }
-        if (Test-Path $errFile) {
-            # Git normally writes push progress to stderr. Exit code decides success.
-            Get-Content $errFile | ForEach-Object { if ($_ -ne "") { Log "$_" } }
-        }
-
-        return $proc.ExitCode
+    foreach ($arg in $Arguments) {
+        [void]$psi.ArgumentList.Add($arg)
     }
-    finally {
-        if ($null -eq $oldSsh) {
-            Remove-Item Env:\GIT_SSH_COMMAND -ErrorAction SilentlyContinue
-        } else {
-            $env:GIT_SSH_COMMAND = $oldSsh
-        }
-        Remove-Item $outFile,$errFile -Force -ErrorAction SilentlyContinue
+
+    foreach ($key in $Environment.Keys) {
+        $psi.Environment[$key] = [string]$Environment[$key]
     }
+
+    $proc = New-Object System.Diagnostics.Process
+    $proc.StartInfo = $psi
+    [void]$proc.Start()
+
+    $stdout = $proc.StandardOutput.ReadToEnd()
+    $stderr = $proc.StandardError.ReadToEnd()
+    $proc.WaitForExit()
+
+    if ($stdout) {
+        $stdout.TrimEnd() -split "`r?`n" | ForEach-Object { Log "$_" }
+    }
+    if ($stderr) {
+        # Git normally writes push progress ("To github.com...") to stderr.
+        # Log it as information; do not treat stderr itself as failure.
+        $stderr.TrimEnd() -split "`r?`n" | ForEach-Object { Log "$_" }
+    }
+
+    return $proc.ExitCode
 }
 
 try {
     Set-Location $Root
-    Log "v2.16.3 isolated SYSTEM Git test started."
+    Log "v2.16.1 isolated SYSTEM Git test started."
     Log "Identity: $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
 
     $origin = (& git remote get-url origin 2>&1 | Out-String).Trim()
     Log "Normal origin remains: $origin"
+
     if ($origin -notlike "https://github.com/*") {
         throw "Normal origin is not HTTPS: $origin"
     }
@@ -93,11 +74,11 @@ try {
 
     $testRel = "site/system_v216_isolation_test.txt"
     $testFile = Join-Path $Root $testRel
-    "v2.16.3 SYSTEM isolated push test $(Get-Date -Format o)" |
+    "v2.16.1 SYSTEM isolated push test $(Get-Date -Format o)" |
         Set-Content -Path $testFile -Encoding ASCII
     Log "Created $testRel"
 
-    $code = Run-Git @("add", "--", $testRel)
+    $code = Run-Native "git.exe" @("add", "--", $testRel)
     if ($code -ne 0) { throw "git add failed with exit code $code" }
 
     $changes = (& git status --porcelain -- $testRel 2>&1 | Out-String).Trim()
@@ -105,9 +86,9 @@ try {
         throw "No Git change detected for test file."
     }
 
-    $code = Run-Git @(
+    $code = Run-Native "git.exe" @(
         "commit",
-        "-m", "Test v2.16.3 isolated SYSTEM Git publishing",
+        "-m", "Test v2.16.1 isolated SYSTEM Git publishing",
         "--", $testRel
     )
     if ($code -ne 0) { throw "git commit failed with exit code $code" }
@@ -118,15 +99,15 @@ try {
     $sshCommand = "`"$ssh`" -i `"$key`" -o IdentitiesOnly=yes -o UserKnownHostsFile=`"$known`" -o StrictHostKeyChecking=yes"
 
     Log "Attempting push with process-local SYSTEM deploy key..."
-    $code = Run-Git @(
+    $code = Run-Native "git.exe" @(
         "push",
         "git@github.com:stevegiergiel/VIVAMK_Clearance_Booklet.git",
         "HEAD:main"
-    ) $sshCommand
+    ) @{ "GIT_SSH_COMMAND" = $sshCommand }
 
     if ($code -ne 0) { throw "git push failed with exit code $code" }
 
-    Log "SUCCESS: v2.16.3 SYSTEM isolated SSH push works while normal origin remains HTTPS."
+    Log "SUCCESS: v2.16.1 SYSTEM isolated SSH push works while normal origin remains HTTPS."
     exit 0
 }
 catch {

@@ -2,10 +2,10 @@
 setlocal
 cd /d F:\VIVAMK_Clearance_Booklet
 
-echo VivaMK v2.16.3 isolated SYSTEM Git test
+echo VivaMK v2.16.1 isolated SYSTEM Git test
 echo =======================================
 echo.
-echo Tests the production monitor's isolated SYSTEM SSH publishing path.
+echo This temporary task tests the same isolated SSH method used by v2.16.
 echo Your normal origin remains HTTPS.
 echo Run this BAT as Administrator.
 echo.
