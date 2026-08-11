@@ -1,4 +1,0 @@
-﻿VivaMK SYSTEM Git publishing test
-Created: 2026-08-11 15:10:49
-Machine: GIERGIEL-PC
-Account: NT AUTHORITY\SYSTEM
