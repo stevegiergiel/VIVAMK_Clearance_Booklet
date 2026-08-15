@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Booklet edition identity, frozen SKU layout registry, and safe SOLD OUT overprints.
 
-The product SKU is the identity. Card position is stored only as metadata for a
-specific physical booklet edition, so a later scrape/order change cannot move a
-SOLD OUT ribbon onto the wrong product.
+Safety model:
+- SKU is the product identity.
+- Booklet ID is the physical-edition identity.
+- Position is stored only inside that booklet edition's frozen SKU map.
+- SOLD OUT history is cumulative and is never inferred from card position.
 """
 from __future__ import annotations
 
@@ -59,14 +61,75 @@ def _layout(rows: list[dict], cards_per_page: int) -> list[dict]:
     return result
 
 
+def _history_path(sale_id: str) -> Path:
+    return ROOT / "monitor_state" / f"{sale_id}_sold_out_history.json"
+
+
+def _load_history(sale_id: str) -> dict[str, dict]:
+    path = _history_path(sale_id)
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data.get("products", {})
+    except Exception:
+        return {}
+
+
+def _capture_sold_out_history(sale_id: str, extra_rows: list[dict] | None = None) -> dict[str, dict]:
+    """Append current SOLD OUT evidence to permanent history; never delete old entries."""
+    history = _load_history(sale_id)
+    now = datetime.now().isoformat(timespec="seconds")
+
+    state_path = ROOT / "monitor_state" / f"{sale_id}.json"
+    if state_path.exists():
+        data = json.loads(state_path.read_text(encoding="utf-8"))
+        for key, item in data.get("products", {}).items():
+            if item.get("status") != "sold_out":
+                continue
+            sku = (item.get("sku") or key or "").strip()
+            if not sku:
+                continue
+            existing = history.get(sku, {})
+            history[sku] = {
+                "sku": sku,
+                "product": item.get("product", existing.get("product", "")),
+                "first_sold_out": existing.get("first_sold_out") or item.get("sold_out_since") or now,
+                "last_confirmed_sold_out": now,
+            }
+
+    for row in extra_rows or []:
+        if (row.get("stock_status") or "").strip().lower() != "sold_out":
+            continue
+        sku = (row.get("sku") or "").strip()
+        if not sku:
+            continue
+        existing = history.get(sku, {})
+        history[sku] = {
+            "sku": sku,
+            "product": (row.get("product") or existing.get("product", "")).strip(),
+            "first_sold_out": existing.get("first_sold_out") or row.get("sold_out_since") or now,
+            "last_confirmed_sold_out": now,
+        }
+
+    path = _history_path(sale_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({
+        "sale_id": sale_id,
+        "updated_at": now,
+        "products": history,
+    }, indent=2), encoding="utf-8")
+    return history
+
+
 def _id_overlay(path: Path, booklet_id: str, page_count: int) -> Path:
     overlay_path = path.with_name(path.stem + "_booklet_id_overlay.pdf")
-    w, h = A5
+    w, _ = A5
     c = canvas.Canvas(str(overlay_path), pagesize=A5)
     for _ in range(page_count):
-        c.setFillColor(HexColor("#D8D8D8"))
+        c.setFillColor(HexColor("#C8C8C8"))
         c.setFont("Helvetica", 4.2)
-        c.drawRightString(w - 4 * mm, 1.8 * mm, f"Booklet ID: {booklet_id}")
+        c.drawRightString(w - 4 * mm, 3.2 * mm, f"Booklet ID: {booklet_id}")
         c.showPage()
     c.save()
     return overlay_path
@@ -101,10 +164,10 @@ def register_booklet(config_path: Path, booklet_id: str | None = None) -> tuple[
         raise FileNotFoundError("Build the booklet first; price CSV/A5 PDF is missing.")
 
     rows = _read_rows(csv_path)
+    _capture_sold_out_history(sale_id, rows)
     booklet_id = booklet_id or _make_booklet_id(sale_id, rows)
     page_count = stamp_a5_booklet(a5_pdf, booklet_id)
 
-    # Re-impose from the now-identified A5 source so the physical A4 booklet carries the same ID.
     from vivamk_clearance_booklet import impose_booklet
     impose_booklet(a5_pdf, a4_pdf)
 
@@ -131,16 +194,8 @@ def register_booklet(config_path: Path, booklet_id: str | None = None) -> tuple[
 
 
 def _sold_out_skus(sale_id: str) -> set[str]:
-    result: set[str] = set()
-    state_path = ROOT / "monitor_state" / f"{sale_id}.json"
-    if state_path.exists():
-        data = json.loads(state_path.read_text(encoding="utf-8"))
-        for key, item in data.get("products", {}).items():
-            if item.get("status") == "sold_out":
-                sku = (item.get("sku") or key or "").strip()
-                if sku:
-                    result.add(sku)
-    return result
+    history = _capture_sold_out_history(sale_id)
+    return set(history)
 
 
 def _card_box(position: int, cards_per_page: int):
@@ -213,10 +268,9 @@ def make_overprint(config_path: Path, booklet_id: str | None = None) -> Path:
         for p in by_page.get(page_no, []):
             x, y, w, h = _card_box(int(p["card_position"]), int(manifest["cards_per_page"]))
             _draw_ribbon(c, x, y, w, h)
-        # Visible identity check. Same ID is already printed on the underlying booklet.
         c.setFillColor(HexColor("#777777"))
         c.setFont("Helvetica", 4.2)
-        c.drawRightString(A5[0] - 4 * mm, 1.8 * mm, f"OVERPRINT FOR: {booklet_id}")
+        c.drawRightString(A5[0] - 4 * mm, 3.2 * mm, f"OVERPRINT FOR: {booklet_id}")
         c.showPage()
     c.save()
 
@@ -225,11 +279,12 @@ def make_overprint(config_path: Path, booklet_id: str | None = None) -> Path:
         "\n".join([
             f"BOOKLET ID: {booklet_id}",
             f"SALE: {sale_id}",
-            f"SOLD OUT SKUs in current history: {len(sold)}",
+            f"CUMULATIVE SOLD OUT SKUs in history: {len(sold)}",
             f"SOLD OUT SKUs present in this booklet: {len(matched)}",
             "SKUs: " + (", ".join(matched) if matched else "NONE"),
             "",
             "Safety rule: ribbon positions came only from this booklet ID's frozen SKU map.",
+            "If the physical booklet ID does not exactly match this file, DO NOT OVERPRINT.",
         ]) + "\n",
         encoding="utf-8",
     )
