@@ -129,7 +129,7 @@ def _id_overlay(path: Path, booklet_id: str, page_count: int) -> Path:
     for _ in range(page_count):
         c.setFillColor(HexColor("#C8C8C8"))
         c.setFont("Helvetica", 4.2)
-        c.drawRightString(w - 4 * mm, 3.2 * mm, f"Booklet ID: {booklet_id}")
+        c.drawCentredString(w / 2, 3.2 * mm, f"Booklet ID: {booklet_id}")
         c.showPage()
     c.save()
     return overlay_path
@@ -270,7 +270,7 @@ def make_overprint(config_path: Path, booklet_id: str | None = None) -> Path:
             _draw_ribbon(c, x, y, w, h)
         c.setFillColor(HexColor("#777777"))
         c.setFont("Helvetica", 4.2)
-        c.drawRightString(A5[0] - 4 * mm, 3.2 * mm, f"OVERPRINT FOR: {booklet_id}")
+        c.drawCentredString(A5[0] / 2, 3.2 * mm, f"OVERPRINT FOR: {booklet_id}")
         c.showPage()
     c.save()
 
