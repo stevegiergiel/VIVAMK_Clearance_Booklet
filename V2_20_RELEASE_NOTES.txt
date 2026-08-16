@@ -1,0 +1,41 @@
+V2.20 - SOLD OUT PAPER OVERPRINT
+
+Purpose
+-------
+Allow already-printed, unfolded booklet sheets to be updated when products
+subsequently sell out without reprinting the whole booklet.
+
+What is generated
+-----------------
+When the monitor/booklet state contains one or more SOLD OUT products, the
+booklet engine now additionally creates:
+
+  <sale>_SOLD_OUT_OVERPRINT_A4_PREIMPOSED.pdf
+  <sale>_SOLD_OUT_OVERPRINT_MAP.txt
+
+The A4 overprint PDF uses the SAME booklet imposition and card geometry as the
+normal paper booklet. Every area is blank except the red diagonal SOLD OUT
+ribbon(s), positioned over the exact corresponding product image(s).
+
+The map identifies:
+- A4 PDF page
+- physical sheet number
+- FRONT/BACK side
+- LEFT/RIGHT half
+- A5 page
+- SKU and product name
+
+Printing rules
+--------------
+- Use 100% / Actual Size.
+- Do NOT use Fit, Shrink, Booklet, or automatic scaling.
+- Re-feed the already-printed sheet in exactly the same orientation.
+- Best used before folding/stapling.
+
+Automatic behaviour
+-------------------
+The existing daily monitor already rebuilds the paper booklet with --state-file,
+so the overprint is generated automatically whenever retained SOLD OUT products
+exist. If there are no SOLD OUT products, stale overprint files are deleted.
+
+The ordinary booklet and iframe SOLD OUT behaviour is unchanged.

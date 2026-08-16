@@ -1,0 +1,709 @@
+{
+  "booklet_id": "WINTER-WARME-20260816-024343-C2F4B0",
+  "sale_id": "winter_warmers",
+  "display_name": "Winter Warmers Items",
+  "generated_at": "2026-08-16T02:43:48",
+  "source_mode": "category",
+  "cards_per_page": 6,
+  "a5_page_count": 20,
+  "a5_pdf": "output\\winter_warmers\\winter_warmers_clearance_A5_FOR_EPSON_BOOKLET.pdf",
+  "a4_pdf": "output\\winter_warmers\\winter_warmers_clearance_A4_PREIMPOSED_NO_BOOKLET_SETTING.pdf",
+  "products": [
+    {
+      "sku": "14680",
+      "product": "Adults LED Beanie Hat",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 1
+    },
+    {
+      "sku": "14650",
+      "product": "Black Umbrella",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 2
+    },
+    {
+      "sku": "13831",
+      "product": "Car De-Icer 500ml",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 3
+    },
+    {
+      "sku": "14640",
+      "product": "Children's Winter 3 Piece Set - Grey & Black",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 4
+    },
+    {
+      "sku": "14641",
+      "product": "Children's Winter 3 Piece Set - Navy & Pink",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 5
+    },
+    {
+      "sku": "14001",
+      "product": "Childrens Handy Gripper Magic Gloves",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 6
+    },
+    {
+      "sku": "14000",
+      "product": "Childrens Knitted Thermal Insulation Hat",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 1
+    },
+    {
+      "sku": "90947",
+      "product": "Christmas Oversized Blanket Hoodie",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 2
+    },
+    {
+      "sku": "11845",
+      "product": "Classic Tartan Duvet Set - Blue (Double)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 3
+    },
+    {
+      "sku": "11846",
+      "product": "Classic Tartan Duvet Set - Blue (King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 4
+    },
+    {
+      "sku": "11844",
+      "product": "Classic Tartan Duvet Set - Blue (Single)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 5
+    },
+    {
+      "sku": "13839",
+      "product": "Classic Tartan Duvet Set - Blue (Super King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 6
+    },
+    {
+      "sku": "12226",
+      "product": "Classic Tartan Duvet Set - Red (Double)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 1
+    },
+    {
+      "sku": "12227",
+      "product": "Classic Tartan Duvet Set - Red (King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 2
+    },
+    {
+      "sku": "13838",
+      "product": "Classic Tartan Duvet Set - Red (Super King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 3
+    },
+    {
+      "sku": "14606",
+      "product": "Classic Tartan Duvet Set - Terracotta (Double)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 4
+    },
+    {
+      "sku": "14607",
+      "product": "Classic Tartan Duvet Set - Terracotta (King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 5
+    },
+    {
+      "sku": "14608",
+      "product": "Classic Tartan Duvet Set - Terracotta (Super King Size)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 6
+    },
+    {
+      "sku": "14002",
+      "product": "Daisy Umbrella",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 1
+    },
+    {
+      "sku": "13829",
+      "product": "Digital Thermometer",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 2
+    },
+    {
+      "sku": "14677",
+      "product": "Fluffy Beanie with Faux Pearl - Cream",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 3
+    },
+    {
+      "sku": "14675",
+      "product": "Fluffy Beanie with Faux Pearl - Lilac",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 4
+    },
+    {
+      "sku": "14678",
+      "product": "Fluffy Scarf with Faux Pearl - Cream",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 5
+    },
+    {
+      "sku": "14676",
+      "product": "Fluffy Scarf with Faux Pearl - Lilac",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 6
+    },
+    {
+      "sku": "14637",
+      "product": "Foot Warmer Hot Water Bottle - Printed Plush",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 1
+    },
+    {
+      "sku": "13821",
+      "product": "Foot Warmer Hot Water Bottle - Tartan",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 2
+    },
+    {
+      "sku": "13827",
+      "product": "Foot Warmer Inserts - 2 Pairs",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 3
+    },
+    {
+      "sku": "14593",
+      "product": "Grey Faux Fur Long Hot Water Bottle",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 4
+    },
+    {
+      "sku": "14682",
+      "product": "Heat Machine Showerproof Balaclava",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 5
+    },
+    {
+      "sku": "14673",
+      "product": "Heat Machine Thermal Tassle Scarf",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 6
+    },
+    {
+      "sku": "14627",
+      "product": "Highland Coo Microwavable Plush Neck Warmer - Lavender",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 1
+    },
+    {
+      "sku": "14628",
+      "product": "Highland Coo Slippers",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 2
+    },
+    {
+      "sku": "13844",
+      "product": "Hooded Double Layer Blanket - Navy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 3
+    },
+    {
+      "sku": "12291",
+      "product": "Ice Scraper",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 4
+    },
+    {
+      "sku": "14599",
+      "product": "Ice Scraper with Fleece Glove",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 5
+    },
+    {
+      "sku": "14591",
+      "product": "Insulated Camping Mat",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 6
+    },
+    {
+      "sku": "14799",
+      "product": "Kids Oversized Plush Hoodie - Dark Grey",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 1
+    },
+    {
+      "sku": "14672",
+      "product": "Kids Oversized Plush Hoodie -Gamer",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 2
+    },
+    {
+      "sku": "14644",
+      "product": "Kleeneze Heated Under Blanket - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 3
+    },
+    {
+      "sku": "14679",
+      "product": "Ladies Thermal Socks - pack of 3",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 4
+    },
+    {
+      "sku": "12203",
+      "product": "Luxury Draught Excluder - Westie",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 5
+    },
+    {
+      "sku": "14587",
+      "product": "Luxury Satin Stripe 13.5 Tog Duvet - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 6
+    },
+    {
+      "sku": "14635",
+      "product": "Luxury Sherpa Throw - Dachshund",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 1
+    },
+    {
+      "sku": "14633",
+      "product": "Luxury Super Soft Flannel Blanket - Dachshund",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 2
+    },
+    {
+      "sku": "14616",
+      "product": "Luxury Teddy Bedding Blue Chevron - Double",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 3
+    },
+    {
+      "sku": "14617",
+      "product": "Luxury Teddy Bedding Blue Chevron - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 4
+    },
+    {
+      "sku": "14615",
+      "product": "Luxury Teddy Bedding Blue Chevron - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 5
+    },
+    {
+      "sku": "14610",
+      "product": "Luxury Teddy Bedding Duck Egg Check - Double",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 6
+    },
+    {
+      "sku": "14611",
+      "product": "Luxury Teddy Bedding Duck Egg Check - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 1
+    },
+    {
+      "sku": "14609",
+      "product": "Luxury Teddy Bedding Duck Egg Check - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 2
+    },
+    {
+      "sku": "14625",
+      "product": "Luxury Teddy Bedding Grey Diamond - Double",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 3
+    },
+    {
+      "sku": "14626",
+      "product": "Luxury Teddy Bedding Grey Diamond - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 4
+    },
+    {
+      "sku": "14624",
+      "product": "Luxury Teddy Bedding Grey Diamond - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 5
+    },
+    {
+      "sku": "14613",
+      "product": "Luxury Teddy Bedding Latte Waffle - Double",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 6
+    },
+    {
+      "sku": "14614",
+      "product": "Luxury Teddy Bedding Latte Waffle - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 1
+    },
+    {
+      "sku": "14612",
+      "product": "Luxury Teddy Bedding Latte Waffle - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 2
+    },
+    {
+      "sku": "14623",
+      "product": "Luxury Teddy Bedding Navy Diamond - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 3
+    },
+    {
+      "sku": "14621",
+      "product": "Luxury Teddy Bedding Navy Diamond - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 4
+    },
+    {
+      "sku": "14656",
+      "product": "Massaging Foot Warmer",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 5
+    },
+    {
+      "sku": "14592",
+      "product": "Mini Ultra Bright LED Lantern",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 6
+    },
+    {
+      "sku": "14630",
+      "product": "Nordic Design Fur Lined Slipper Socks",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 1
+    },
+    {
+      "sku": "14595",
+      "product": "Novelty Hot Water Bottle - Fox",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 2
+    },
+    {
+      "sku": "14594",
+      "product": "Novelty Hot Water Bottle - Penguin",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 3
+    },
+    {
+      "sku": "12885",
+      "product": "Oversized Blanket Hoodie - Buzzy Bees",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 4
+    },
+    {
+      "sku": "12888",
+      "product": "Oversized Blanket Hoodie - Cute Kittens",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 5
+    },
+    {
+      "sku": "12890",
+      "product": "Oversized Blanket Hoodie - Skater Dogs",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 6
+    },
+    {
+      "sku": "14662",
+      "product": "Pack of 35 Sleep Tumble Dryer Sheets - Lavender & Chamomile",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 1
+    },
+    {
+      "sku": "14598",
+      "product": "Pair of Snow Spikes",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 2
+    },
+    {
+      "sku": "14667",
+      "product": "Purple Iridescent Star Oil & Wax Burner",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 3
+    },
+    {
+      "sku": "14636",
+      "product": "Sleep Travel Set - 3 Piece",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 4
+    },
+    {
+      "sku": "14654",
+      "product": "Stainless Steel Flask & Gloves Gift Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 5
+    },
+    {
+      "sku": "14651",
+      "product": "Super Bright LED Torch",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 6
+    },
+    {
+      "sku": "14604",
+      "product": "Teddy Fitted Sheet (Cream) - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 1
+    },
+    {
+      "sku": "14631",
+      "product": "Thermal Door Curtain - Grey",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 2
+    },
+    {
+      "sku": "14600",
+      "product": "Thermal Fleece Insoles - 2 Pairs",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 3
+    },
+    {
+      "sku": "13941",
+      "product": "Thermo Max Fleece Snood",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 4
+    },
+    {
+      "sku": "13825",
+      "product": "Thermo Max Gloves",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 5
+    },
+    {
+      "sku": "13853",
+      "product": "Thermo Max Ribbed Hat - Black",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 6
+    },
+    {
+      "sku": "13826",
+      "product": "Thermo Max Ribbed Hat - Grey",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 1
+    },
+    {
+      "sku": "14681",
+      "product": "Touch Screen Thermal Gloves - Adults",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 2
+    },
+    {
+      "sku": "13833",
+      "product": "Universal 12v Heated Seat Cushion",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 3
+    },
+    {
+      "sku": "12177",
+      "product": "Vapour Oil",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 4
+    },
+    {
+      "sku": "14664",
+      "product": "Vapour Patch - Pack of 6",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 5
+    },
+    {
+      "sku": "14601",
+      "product": "Window Insulation Kit",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 6
+    },
+    {
+      "sku": "13830",
+      "product": "Windscreen Frost Shield",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 1
+    },
+    {
+      "sku": "14646",
+      "product": "Winged Heated Airer Cover",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 2
+    },
+    {
+      "sku": "13290",
+      "product": "Wooden Wall Thermometer",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 3
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-name: Build clearance iframe pages
+name: Deploy clearance iframe pages
 
 on:
   workflow_dispatch:
@@ -6,9 +6,6 @@ on:
     branches: [main]
     paths:
       - "site/**"
-      - "configs/**"
-      - "vivamk_clearance_iframe.py"
-      - "vivamk_clearance_booklet.py"
       - ".github/workflows/deploy-pages.yml"
 
 permissions:
@@ -17,29 +14,22 @@ permissions:
   id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: |
-          python vivamk_clearance_iframe.py --config configs/christmas.json
-          python vivamk_clearance_iframe.py --config configs/mega_sale.json
-          python vivamk_clearance_iframe.py --config configs/pets.json
-          python vivamk_clearance_iframe.py --config configs/personalised.json
-          python vivamk_clearance_iframe.py --config configs/winter_warmers.json
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
     steps:
+      - uses: actions/checkout@v4
+
+      # IMPORTANT:
+      # Do NOT rebuild iframe HTML in GitHub Actions.
+      # The Windows daily monitor is authoritative because it owns the
+      # persistent product state and known-good SOLD OUT image cache.
+      # GitHub Pages simply deploys the committed site/ output verbatim.
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
       - uses: actions/deploy-pages@v4

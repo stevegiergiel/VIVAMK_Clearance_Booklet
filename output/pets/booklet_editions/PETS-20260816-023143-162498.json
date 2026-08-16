@@ -1,0 +1,189 @@
+{
+  "booklet_id": "PETS-20260816-023143-162498",
+  "sale_id": "pets",
+  "display_name": "Pets Related Items",
+  "generated_at": "2026-08-16T02:31:44",
+  "source_mode": "category",
+  "cards_per_page": 6,
+  "a5_page_count": 8,
+  "a5_pdf": "output\\pets\\pets_clearance_A5_FOR_EPSON_BOOKLET.pdf",
+  "a4_pdf": "output\\pets\\pets_clearance_A4_PREIMPOSED_NO_BOOKLET_SETTING.pdf",
+  "products": [
+    {
+      "sku": "14492",
+      "product": "3 in 1 Grooming Kit",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 1
+    },
+    {
+      "sku": "14432",
+      "product": "Birthday Cake Pet Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 2
+    },
+    {
+      "sku": "14433",
+      "product": "Birthday Plush Present Dog Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 3
+    },
+    {
+      "sku": "14517",
+      "product": "Black Pawkid Pawfume by Tom Pawed - 100ml",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 4
+    },
+    {
+      "sku": "14439",
+      "product": "Chasing Laser Pointer Cat Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 5
+    },
+    {
+      "sku": "14436",
+      "product": "Dog Bone & Ball Squeaky Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 6
+    },
+    {
+      "sku": "14498",
+      "product": "Dog Print Harness",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 1
+    },
+    {
+      "sku": "14499",
+      "product": "Dog Print Lead",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 2
+    },
+    {
+      "sku": "14496",
+      "product": "Dog Print Poop Bag Dispenser",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 3
+    },
+    {
+      "sku": "14493",
+      "product": "Hi Visibility Pet Safety Flasher",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 4
+    },
+    {
+      "sku": "14438",
+      "product": "Mouse Head Cat Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 5
+    },
+    {
+      "sku": "12397",
+      "product": "Pack of 2 Tennis Balls",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 6
+    },
+    {
+      "sku": "14512",
+      "product": "Pack of 6 Fat Ball Garland",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 1
+    },
+    {
+      "sku": "60474",
+      "product": "Personalised Cat Memorial Stone",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 2
+    },
+    {
+      "sku": "68076",
+      "product": "Personalised Pet Bandana",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 3
+    },
+    {
+      "sku": "14449",
+      "product": "Pet Food Scoop",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 4
+    },
+    {
+      "sku": "14491",
+      "product": "Pet Nail Clippers",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 5
+    },
+    {
+      "sku": "14482",
+      "product": "Pet Odour Eliminating Candle 120g - Ocean Spray",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 6
+    },
+    {
+      "sku": "14481",
+      "product": "Pet Odour Eliminating Reed Diffuser 50ml - Citrus Fruits",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 1
+    },
+    {
+      "sku": "14437",
+      "product": "Rope Pull & Tug Dog Toy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 2
+    },
+    {
+      "sku": "13236",
+      "product": "Universal Pet Seat Belt Restraint",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 3
+    },
+    {
+      "sku": "14514",
+      "product": "Window Bird Feeder",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 4
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "version": "v2.19",
+  "change": "visible concise paper descriptions",
+  "paper_image_fraction_compact": 0.43,
+  "paper_description_max_chars": 165,
+  "paper_description_max_lines": 3,
+  "iframe_unchanged": true,
+  "inherits": "v2.18"
+}

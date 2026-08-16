@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# VIVAMK CLEARANCE BOOKLET ENGINE VERSION v2.08
+# VIVAMK CLEARANCE BOOKLET ENGINE VERSION v2.20
 # Updated: 2026-08-09 16:55 +0100
 # Changes: Generic config-driven engine based on approved Christmas v1.11 visual baseline.
 # Changes: Sale wording, URLs, filenames, professional left/right/footer decorations and colours are config parameters.
@@ -824,6 +824,32 @@ def draw_banner_footer(c: canvas.Canvas, width: float, page_no: int | None = Non
         c.drawRightString(page_x, 4.4 * mm, f"Page {page_no}")
 
 
+def paper_description(text: str, max_chars: int = 165) -> str:
+    """Return a compact print summary derived from the fuller online description."""
+    text = clean_text(text or "")
+    if not text:
+        return DEFAULT_DESCRIPTION
+
+    sentences = re.findall(r'[^.!?]+[.!?]?', text)
+    sentences = [clean_text(s) for s in sentences if clean_text(s)]
+    if not sentences:
+        sentences = [text]
+
+    summary = sentences[0]
+    if len(sentences) > 1:
+        two = f"{summary} {sentences[1]}".strip()
+        if len(two) <= max_chars:
+            summary = two
+
+    if len(summary) <= max_chars:
+        return summary
+
+    clipped = summary[:max_chars + 1]
+    if " " in clipped:
+        clipped = clipped[:clipped.rfind(" ")]
+    return clipped.rstrip(" ,;:-") + "..."
+
+
 def wrap_text(c: canvas.Canvas, text: str, font: str, size: float, max_width: float, max_lines: int) -> list[str]:
     words = clean_text(text).split()
     lines = []
@@ -957,7 +983,7 @@ def draw_product_card(c: canvas.Canvas, row: SaleRow, x: float, y: float, w: flo
     compact = h < 92 * mm
     price_block_h = 19.0 * mm if compact else 21.0 * mm
 
-    image_h = h * (0.49 if compact else 0.48)
+    image_h = h * (0.43 if compact else 0.44)
     image_y = y + h - image_h - pad
     image_bounds = draw_image_contain(c, row.image_file, x + pad, image_y, w - 2 * pad, image_h)
     if MASK_SOURCE_SALE_BADGE and image_bounds:
@@ -992,20 +1018,22 @@ def draw_product_card(c: canvas.Canvas, row: SaleRow, x: float, y: float, w: flo
         ty -= title_leading
 
     price_top = y + price_block_h
-    available = ty - price_top - 0.8 * mm
-    if available > 6:
-        desc_size = 5.3 if compact else 6.0
-        desc_leading = 5.9 if compact else 6.8
-        max_lines = 1 if compact else min(2, max(1, int(available // desc_leading)))
-        desc = row.description or DEFAULT_DESCRIPTION
-        dy = ty - 0.3
-        c.setFillColor(INK)
-        for line in wrap_text(c, desc, "Helvetica", desc_size, w - 2 * pad, max_lines):
-            if dy < price_top + 0.5 * mm:
-                break
-            c.setFont("Helvetica", desc_size)
-            c.drawString(x + pad, dy, line)
-            dy -= desc_leading
+
+    # Reserve a real description zone on every paper card.
+    # Previously this area could collapse to zero on the six-products-per-page
+    # layout, leaving only the product title visible.
+    desc_size = 5.15 if compact else 5.8
+    desc_leading = 5.7 if compact else 6.5
+    max_lines = 3 if compact else 3
+    desc = paper_description(row.description or DEFAULT_DESCRIPTION)
+    dy = ty - 0.5
+    c.setFillColor(INK)
+    for line in wrap_text(c, desc, "Helvetica", desc_size, w - 2 * pad, max_lines):
+        if dy < price_top + 0.8 * mm:
+            break
+        c.setFont("Helvetica", desc_size)
+        c.drawString(x + pad, dy, line)
+        dy -= desc_leading
 
     panel_y = y + 1.6 * mm
     panel_h = price_block_h - 2.2 * mm
@@ -1273,6 +1301,116 @@ def create_a5_brochure(rows: list[SaleRow], out_pdf: Path, cards_per_page: int =
     c.save()
 
 
+def _product_card_geometry(width: float, height: float, cards_per_page: int):
+    """Return card rectangles using the exact geometry of draw_product_page()."""
+    margin_x = 3.5 * mm
+    top = height - 30 * mm
+    bottom = 25.5 * mm
+    gap = 1.8 * mm
+    if cards_per_page <= 4:
+        cols, rws = 2, 2
+    else:
+        cols, rws = 2, 3
+    card_w = (width - 2 * margin_x - gap) / cols
+    card_h = (top - bottom - (rws - 1) * gap) / rws
+    rects = []
+    for idx in range(cols * rws):
+        rr = idx // cols
+        cc = idx % cols
+        x = margin_x + cc * (card_w + gap)
+        y = top - (rr + 1) * card_h - rr * gap
+        rects.append((x, y, card_w, card_h))
+    return rects
+
+
+def create_soldout_overprint_a5(rows: list[SaleRow], out_pdf: Path, cards_per_page: int = 6) -> list[dict]:
+    """Create an A5 overlay containing ONLY SOLD OUT ribbons.
+
+    Page count and product positions exactly mirror create_a5_brochure(), so the
+    resulting overlay can be imposed with impose_booklet() and re-fed through a
+    printer at 100% / Actual Size over an already-printed booklet sheet.
+    """
+    width, height = A5
+    c = canvas.Canvas(str(out_pdf), pagesize=A5)
+    per_page = 4 if cards_per_page <= 4 else 6
+    product_pages = math.ceil(len(rows) / per_page)
+    rects = _product_card_geometry(width, height, cards_per_page)
+    marks: list[dict] = []
+
+    # Pages 1-2: front cover + introduction. Deliberately blank in overprint.
+    c.showPage()
+    c.showPage()
+
+    for p in range(product_pages):
+        chunk = rows[p * per_page:(p + 1) * per_page]
+        a5_page_no = p + 3  # 1-based physical A5 page number
+        for idx, row in enumerate(chunk):
+            if getattr(row, "stock_status", "active") != "sold_out":
+                continue
+            x, y, w, h = rects[idx]
+            pad = 2.4 * mm
+            compact = h < 92 * mm
+            image_h = h * (0.43 if compact else 0.44)
+            image_y = y + h - image_h - pad
+            draw_sold_out_overlay(c, x + pad, image_y, w - 2 * pad, image_h)
+            marks.append({
+                "sku": row.sku,
+                "product": row.product,
+                "a5_page": a5_page_no,
+                "card_position": idx + 1,
+            })
+        c.showPage()
+
+    # Match the exact booklet padding logic before the physical back cover.
+    pages_before_back = 2 + product_pages
+    blanks_before_back = (-(pages_before_back + 1)) % 4
+    for _ in range(blanks_before_back):
+        c.showPage()
+
+    # Back cover overlay page: blank.
+    c.showPage()
+    c.save()
+    return marks
+
+
+def _a5_page_to_imposed_a4(a5_page_no: int, total_a5_pages: int) -> tuple[int, str, str]:
+    """Map a 1-based A5 page to 1-based imposed A4 PDF page, side, and half."""
+    idx = a5_page_no - 1
+    sheets = total_a5_pages // 4
+    for s in range(sheets):
+        layouts = [
+            (2 * s + 1, "FRONT", [(total_a5_pages - 1 - 2 * s, "LEFT"), (2 * s, "RIGHT")]),
+            (2 * s + 2, "BACK",  [(2 * s + 1, "LEFT"), (total_a5_pages - 2 - 2 * s, "RIGHT")]),
+        ]
+        for a4_page, side, halves in layouts:
+            for page_idx, half in halves:
+                if page_idx == idx:
+                    return a4_page, side, half
+    raise ValueError(f"A5 page {a5_page_no} is outside imposed booklet")
+
+
+def write_soldout_overprint_map(marks: list[dict], total_a5_pages: int, out_txt: Path) -> None:
+    lines = [
+        f"{SALE_DISPLAY_NAME} - SOLD OUT OVERPRINT MAP",
+        "",
+        "Print the A4 overprint PDF at 100% / Actual Size (NO Fit/Shrink).",
+        "Re-feed the already-printed physical sheet in exactly the same orientation.",
+        "The overprint PDF contains only the red SOLD OUT ribbons; all other areas are blank.",
+        "",
+    ]
+    if not marks:
+        lines.append("No SOLD OUT products currently require an overprint.")
+    else:
+        for m in marks:
+            a4_page, side, half = _a5_page_to_imposed_a4(m["a5_page"], total_a5_pages)
+            sheet_no = (a4_page + 1) // 2
+            lines.append(
+                f"A4 PDF page {a4_page} - physical sheet {sheet_no} {side} - {half} half - "
+                f"A5 page {m['a5_page']} - SKU {m['sku']} - {m['product']}"
+            )
+    out_txt.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def pad_pdf_to_multiple_of_four(pdf_path: Path):
     reader = PdfReader(str(pdf_path))
     n = len(reader.pages)
@@ -1421,10 +1559,30 @@ def main():
 
     a5_pdf=out_dir/f"{OUTPUT_PREFIX}_A5_FOR_EPSON_BOOKLET.pdf"
     a4_pdf=out_dir/f"{OUTPUT_PREFIX}_A4_PREIMPOSED_NO_BOOKLET_SETTING.pdf"
+    overprint_a5=out_dir/f"{OUTPUT_PREFIX}_SOLD_OUT_OVERPRINT_A5.pdf"
+    overprint_a4=out_dir/f"{OUTPUT_PREFIX}_SOLD_OUT_OVERPRINT_A4_PREIMPOSED.pdf"
+    overprint_map=out_dir/f"{OUTPUT_PREFIX}_SOLD_OUT_OVERPRINT_MAP.txt"
+
     print("Building A5 brochure...")
     create_a5_brochure(rows,a5_pdf,cards_per_page=cards_per_page)
     print("Imposing A4 booklet...")
     impose_booklet(a5_pdf,a4_pdf)
+
+    sold_out_rows=[r for r in rows if getattr(r,"stock_status","active")=="sold_out"]
+    if sold_out_rows:
+        print(f"Building SOLD OUT overprint for {len(sold_out_rows)} product(s)...")
+        marks=create_soldout_overprint_a5(rows,overprint_a5,cards_per_page=cards_per_page)
+        impose_booklet(overprint_a5,overprint_a4)
+        total_a5_pages=len(PdfReader(str(overprint_a5)).pages)
+        write_soldout_overprint_map(marks,total_a5_pages,overprint_map)
+        print(overprint_a4.resolve())
+        print(overprint_map.resolve())
+    else:
+        # Prevent stale overlay files from being mistaken for today's stock state.
+        for stale in (overprint_a5,overprint_a4,overprint_map):
+            stale.unlink(missing_ok=True)
+        print("No SOLD OUT products - no overprint file required.")
+
     print(f"DONE - {len(rows)} products")
     print(a5_pdf.resolve()); print(a4_pdf.resolve()); print(data_csv.resolve())
 

@@ -3,3 +3,9 @@ monitor_state/
 monitor_logs/
 monitor_tmp/
 monitor_cache/
+cache/
+/__pycache__/*.*
+/__pycache__/vivamk_clearance_booklet.cpython-313.pyc
+/*.pyc
+/__pycache__
+*.zip

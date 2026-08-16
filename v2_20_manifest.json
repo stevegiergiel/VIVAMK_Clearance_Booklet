@@ -1,0 +1,9 @@
+{
+  "version": "v2.20",
+  "change": "SOLD OUT paper overprint",
+  "overprint_format": "A4 pre-imposed",
+  "contents": "SOLD OUT ribbons only",
+  "print_map": true,
+  "automatic_with_monitor_state": true,
+  "inherits": "v2.19"
+}

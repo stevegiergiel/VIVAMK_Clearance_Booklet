@@ -1,0 +1,765 @@
+{
+  "booklet_id": "PERSONALISED-20260816-023250-CCBA55",
+  "sale_id": "personalised",
+  "display_name": "Personalised Items",
+  "generated_at": "2026-08-16T02:32:53",
+  "source_mode": "category",
+  "cards_per_page": 6,
+  "a5_page_count": 20,
+  "a5_pdf": "output\\personalised\\personalised_clearance_A5_FOR_EPSON_BOOKLET.pdf",
+  "a4_pdf": "output\\personalised\\personalised_clearance_A4_PREIMPOSED_NO_BOOKLET_SETTING.pdf",
+  "products": [
+    {
+      "sku": "60398",
+      "product": "Ballpoint Pen - Blue Cloud",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 1
+    },
+    {
+      "sku": "60399",
+      "product": "Ballpoint Pen - Red Etched Design",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 2
+    },
+    {
+      "sku": "60290",
+      "product": "Blossom Happy Birthday Mug",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 3
+    },
+    {
+      "sku": "60458",
+      "product": "Captured With Love Robin Earrings",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 4
+    },
+    {
+      "sku": "60218",
+      "product": "Celestial Photo Frame",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 5
+    },
+    {
+      "sku": "60083",
+      "product": "Cheese Slate Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 6
+    },
+    {
+      "sku": "60405",
+      "product": "Childrens Cake Shop Storage Box & Seat",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 1
+    },
+    {
+      "sku": "60269",
+      "product": "Compact Mirror - Silver",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 2
+    },
+    {
+      "sku": "60278",
+      "product": "Cute Owl Pencil Tin",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 3
+    },
+    {
+      "sku": "60365",
+      "product": "Dog Bone Wall Rack",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 4
+    },
+    {
+      "sku": "60323",
+      "product": "Drawstring Bag - Harry Potter",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 5
+    },
+    {
+      "sku": "60321",
+      "product": "Drawstring Bag - Paw Patrol Heroes",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 6
+    },
+    {
+      "sku": "60322",
+      "product": "Drawstring Bag - Peppa Pig",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 1
+    },
+    {
+      "sku": "60050",
+      "product": "Drinking Bottle - Elf",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 2
+    },
+    {
+      "sku": "60051",
+      "product": "Drinking Bottle - Santa",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 3
+    },
+    {
+      "sku": "60480",
+      "product": "Drinks Bottle - Chase",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 4
+    },
+    {
+      "sku": "60479",
+      "product": "Drinks Bottle - Skye",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 5
+    },
+    {
+      "sku": "60444",
+      "product": "Festive Santa Belly Mug",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 6
+    },
+    {
+      "sku": "60462",
+      "product": "Festive Water Bottle - Green",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 1
+    },
+    {
+      "sku": "60461",
+      "product": "Festive Water Bottle - Red",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 2
+    },
+    {
+      "sku": "60429",
+      "product": "Festive Wooden Cat with Jumper",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 3
+    },
+    {
+      "sku": "60366",
+      "product": "Flexible Sofa Tray",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 4
+    },
+    {
+      "sku": "60384",
+      "product": "Floral Drinking Bottle",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 5
+    },
+    {
+      "sku": "60445",
+      "product": "Frosty Snowman Mug",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 6
+    },
+    {
+      "sku": "60484",
+      "product": "Frozen 52 Piece Colouring Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 1
+    },
+    {
+      "sku": "60460",
+      "product": "Fun Time Pets Memo Pad - Dogs",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 2
+    },
+    {
+      "sku": "60446",
+      "product": "Gingerbread Glass Cup",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 3
+    },
+    {
+      "sku": "68051",
+      "product": "Gold Bauble",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 4
+    },
+    {
+      "sku": "60182",
+      "product": "Gonk Advent Calendar",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 5
+    },
+    {
+      "sku": "60354",
+      "product": "Gonk Bauble Tree - Pink",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 6
+    },
+    {
+      "sku": "60353",
+      "product": "Gonk Bauble Tree - Red",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 1
+    },
+    {
+      "sku": "60345",
+      "product": "Gonk Lidded Mug",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 2
+    },
+    {
+      "sku": "60330",
+      "product": "Gonk Trio Led Candlelight",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 3
+    },
+    {
+      "sku": "60351",
+      "product": "Gonk Wooden Stocking",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 4
+    },
+    {
+      "sku": "60410",
+      "product": "Gradient Glass with Bamboo Lid & Straw - Turquoise",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 5
+    },
+    {
+      "sku": "60205",
+      "product": "Harry Potter Hedwig Plaque",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 6
+    },
+    {
+      "sku": "60282",
+      "product": "Harry Potter Light Up Jar - Hogwarts Express",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 1
+    },
+    {
+      "sku": "60284",
+      "product": "Harry Potter Photo Frame - Wizard",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 2
+    },
+    {
+      "sku": "60303",
+      "product": "House Shape Keyring",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 3
+    },
+    {
+      "sku": "60254",
+      "product": "Jumbo Pencil Case - Blue",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 4
+    },
+    {
+      "sku": "60091",
+      "product": "Leather Brown Wallet",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 5
+    },
+    {
+      "sku": "60128",
+      "product": "Leather Dog Collar - Medium",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 6
+    },
+    {
+      "sku": "60146",
+      "product": "Leather Keyring with silver foil",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 1
+    },
+    {
+      "sku": "60222",
+      "product": "LED Reindeer Head",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 2
+    },
+    {
+      "sku": "68074",
+      "product": "Lunch Box & Bottle - Pink",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 3
+    },
+    {
+      "sku": "60373",
+      "product": "Luxury Mobile Phone Bag - Navy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 4
+    },
+    {
+      "sku": "60470",
+      "product": "Mega Craft Case",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 5
+    },
+    {
+      "sku": "60264",
+      "product": "Memorial Heart Plaque",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 6
+    },
+    {
+      "sku": "60305",
+      "product": "Mens Manicure Set - 6 Piece",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 1
+    },
+    {
+      "sku": "60395",
+      "product": "Mindful Moments Affirmation Cards with Wooden Stand",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 2
+    },
+    {
+      "sku": "60389",
+      "product": "Mini Aluminium Torch Keyring",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 3
+    },
+    {
+      "sku": "68061",
+      "product": "Multi Tool Keyring",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 4
+    },
+    {
+      "sku": "60394",
+      "product": "Multi-coloured Gratitude Journal with Amethyst Pen",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 5
+    },
+    {
+      "sku": "60423",
+      "product": "Musical Fairy Snow Globe",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 6
+    },
+    {
+      "sku": "60422",
+      "product": "Musical Gonk Snow Globe",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 1
+    },
+    {
+      "sku": "60400",
+      "product": "Paw Patrol Chase Money Box",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 2
+    },
+    {
+      "sku": "60401",
+      "product": "Paw Patrol Photo Frame",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 3
+    },
+    {
+      "sku": "60349",
+      "product": "Paw Patrol Santa Stop Here",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 4
+    },
+    {
+      "sku": "68066",
+      "product": "Personalised Bracelet - Pink",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 5
+    },
+    {
+      "sku": "60474",
+      "product": "Personalised Cat Memorial Stone",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 6
+    },
+    {
+      "sku": "68064",
+      "product": "Personalised Hair Clips",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 1
+    },
+    {
+      "sku": "60336",
+      "product": "Personalised Nativity Scene",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 2
+    },
+    {
+      "sku": "68076",
+      "product": "Personalised Pet Bandana",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 3
+    },
+    {
+      "sku": "60477",
+      "product": "Personalised Robin keyring",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 4
+    },
+    {
+      "sku": "60126",
+      "product": "Pet Treat Jar (Large)",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 5
+    },
+    {
+      "sku": "60307",
+      "product": "Pet Treat Jar with Black Lid",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 6
+    },
+    {
+      "sku": "60277",
+      "product": "Pirate Pencil Tin",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 1
+    },
+    {
+      "sku": "60263",
+      "product": "Plant Pot Mug - Hello Sunshine",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 2
+    },
+    {
+      "sku": "60262",
+      "product": "Plant Pot Mug - Keep On Growing",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 3
+    },
+    {
+      "sku": "68053",
+      "product": "Red Bauble",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 4
+    },
+    {
+      "sku": "60416",
+      "product": "Reindeer Treat Jar",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 5
+    },
+    {
+      "sku": "60457",
+      "product": "Robins Appear Message Bookmark",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 6
+    },
+    {
+      "sku": "60187",
+      "product": "Santa Please Stop Here Plaque",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 1
+    },
+    {
+      "sku": "60421",
+      "product": "Santa's Secret Festive Figurines - 4 in 1",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 2
+    },
+    {
+      "sku": "60397",
+      "product": "Serenity Gemstone Tree Tea Light Holder - 7 Chakras",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 3
+    },
+    {
+      "sku": "60443",
+      "product": "Set of 2 Blue Storage Cubes",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 4
+    },
+    {
+      "sku": "60442",
+      "product": "Set of 2 Pink Storage Cubes",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 5
+    },
+    {
+      "sku": "60144",
+      "product": "Shenanigans' Signature Martini Glass",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 6
+    },
+    {
+      "sku": "60341",
+      "product": "Silver Belt Watch",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 1
+    },
+    {
+      "sku": "60226",
+      "product": "Silver Gonk With Sequin Hat",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 2
+    },
+    {
+      "sku": "60291",
+      "product": "Skull & Roses Mug",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 3
+    },
+    {
+      "sku": "60296",
+      "product": "Skull Tankard",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 4
+    },
+    {
+      "sku": "60159",
+      "product": "Solid Pine Slatted Crate",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 5
+    },
+    {
+      "sku": "60485",
+      "product": "Spiderman 52 Piece Colouring Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 6
+    },
+    {
+      "sku": "60206",
+      "product": "Sweet Dreams Rainbow Plaque",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 1
+    },
+    {
+      "sku": "60403",
+      "product": "Thoughts of You Tube Light - Stairway",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 2
+    },
+    {
+      "sku": "60193",
+      "product": "Tie Clip",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 3
+    },
+    {
+      "sku": "60251",
+      "product": "Treat Tin",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 4
+    },
+    {
+      "sku": "60252",
+      "product": "Treat Tin - Grey",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 5
+    },
+    {
+      "sku": "60375",
+      "product": "Tree of Life Locket",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 17,
+      "card_position": 6
+    },
+    {
+      "sku": "60372",
+      "product": "Two Tone Mobile Phone - Black",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 18,
+      "card_position": 1
+    },
+    {
+      "sku": "60288",
+      "product": "Unicorn Water Bottle",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 18,
+      "card_position": 2
+    },
+    {
+      "sku": "60488",
+      "product": "Winter Wonderland Dinner Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 18,
+      "card_position": 3
+    },
+    {
+      "sku": "60348",
+      "product": "Xmas Red LED Lantern",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 18,
+      "card_position": 4
+    }
+  ]
+}

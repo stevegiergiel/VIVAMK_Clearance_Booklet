@@ -1,0 +1,19 @@
+V2.19 - VISIBLE CONCISE DESCRIPTIONS ON PAPER BOOKLETS
+
+Observed issue
+--------------
+The current six-products-per-page paper layout effectively leaves no visible
+description area, so printed cards show only the product name and pricing.
+
+Fix
+---
+- Slightly reduces the paper product-image area.
+- Reserves a real description zone on every product card.
+- Uses a concise summary derived from the fuller online product description.
+- Normally keeps the first sentence, adding a second only when it remains short.
+- Caps the summary at about 165 characters.
+- Allows up to 3 compact print lines.
+- SKU and price block remain protected and unchanged.
+- Online iframe descriptions are unchanged.
+
+This applies to all paper clearance booklets using the generic engine.

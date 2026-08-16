@@ -1,0 +1,14 @@
+{
+  "version": "v2.18",
+  "change": "state-safe GitHub Pages deploy-only workflow",
+  "authoritative_builder": "Windows daily monitor",
+  "github_actions_rebuilds_iframe": false,
+  "pages_deploys_committed_site_verbatim": true,
+  "sales": [
+    "christmas",
+    "mega_sale",
+    "pets",
+    "personalised",
+    "winter_warmers"
+  ]
+}

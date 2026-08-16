@@ -1,0 +1,677 @@
+{
+  "booklet_id": "MEGA-SALE-20260816-023120-C9EB8A",
+  "sale_id": "mega_sale",
+  "display_name": "Mega Sale Items",
+  "generated_at": "2026-08-16T02:31:23",
+  "source_mode": "category",
+  "cards_per_page": 6,
+  "a5_page_count": 20,
+  "a5_pdf": "output\\mega_sale\\mega_sale_clearance_A5_FOR_EPSON_BOOKLET.pdf",
+  "a4_pdf": "output\\mega_sale\\mega_sale_clearance_A4_PREIMPOSED_NO_BOOKLET_SETTING.pdf",
+  "products": [
+    {
+      "sku": "14337",
+      "product": "2 in 1 Travel Pillow & Plush Toy - Unicorn",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 1
+    },
+    {
+      "sku": "11250",
+      "product": "20 warm white LED Rose Lights",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 2
+    },
+    {
+      "sku": "13429",
+      "product": "2in1 Travel Pillow & Eye Mask - Clownfish",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 3
+    },
+    {
+      "sku": "13430",
+      "product": "2in1 Travel Pillow & Eye Mask - Shark",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 4
+    },
+    {
+      "sku": "70243",
+      "product": "Baked Blush - Goddess",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 5
+    },
+    {
+      "sku": "14338",
+      "product": "Beach Bag - Capybara",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 3,
+      "card_position": 6
+    },
+    {
+      "sku": "14080",
+      "product": "Betty - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 1
+    },
+    {
+      "sku": "14078",
+      "product": "Betty - Single",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 2
+    },
+    {
+      "sku": "12142",
+      "product": "Bike Cleaner",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 3
+    },
+    {
+      "sku": "13723",
+      "product": "Birds on a Branch",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 4
+    },
+    {
+      "sku": "13919",
+      "product": "Bronzing Glow Drops",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 5
+    },
+    {
+      "sku": "13908",
+      "product": "Ceramide Moisturising Cream SPF30",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 4,
+      "card_position": 6
+    },
+    {
+      "sku": "14319",
+      "product": "Ceramide Oil Control Cleanser",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 1
+    },
+    {
+      "sku": "14318",
+      "product": "Ceramide Oil Control Toner",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 2
+    },
+    {
+      "sku": "12929",
+      "product": "Collapsible Makeup Brush Cleaning Bowl",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 3
+    },
+    {
+      "sku": "11978",
+      "product": "Comfi Kneeler",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 4
+    },
+    {
+      "sku": "13461",
+      "product": "Deluxe Wall Plaque - Hummingbird",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 5
+    },
+    {
+      "sku": "14385",
+      "product": "Denim Reviver Sheets 12pk",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 5,
+      "card_position": 6
+    },
+    {
+      "sku": "13123",
+      "product": "Dino Plaque",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 1
+    },
+    {
+      "sku": "13661",
+      "product": "Dino Track",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 2
+    },
+    {
+      "sku": "13121",
+      "product": "Dinosaur Frame - Stegosaurus",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 3
+    },
+    {
+      "sku": "12143",
+      "product": "Engine & Chain Degreaser",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 4
+    },
+    {
+      "sku": "13912",
+      "product": "Face Facts - BHA Toner",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 5
+    },
+    {
+      "sku": "13913",
+      "product": "Face Facts - Niacinamide Cleanser",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 6,
+      "card_position": 6
+    },
+    {
+      "sku": "13897",
+      "product": "Face Facts Body Scrub - Lavender & Vanilla",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 1
+    },
+    {
+      "sku": "13915",
+      "product": "Face Facts Overnight Renew - Replenishing Cleansing Balm",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 2
+    },
+    {
+      "sku": "13392",
+      "product": "Face Facts Overnight Renew - Sleep Elixir Facial Serum",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 3
+    },
+    {
+      "sku": "13911",
+      "product": "Facial Cleansing Kit",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 4
+    },
+    {
+      "sku": "14163",
+      "product": "Fern Hanging Pot - Sage",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 5
+    },
+    {
+      "sku": "14162",
+      "product": "Fern Hanging Pot - Terracotta",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 7,
+      "card_position": 6
+    },
+    {
+      "sku": "13794",
+      "product": "Fine Tip Pen - Unicorn",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 1
+    },
+    {
+      "sku": "13978",
+      "product": "Floral Cork Placemats 4pk",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 2
+    },
+    {
+      "sku": "13798",
+      "product": "Foam Bath Mirror",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 3
+    },
+    {
+      "sku": "13900",
+      "product": "Folding Makeup Ring Light",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 4
+    },
+    {
+      "sku": "12902",
+      "product": "Full Face Gel Mask",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 5
+    },
+    {
+      "sku": "13107",
+      "product": "Gemstone Dome Tree - Rose Quartz",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 8,
+      "card_position": 6
+    },
+    {
+      "sku": "13106",
+      "product": "Gemstone Tree - Amethyst",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 1
+    },
+    {
+      "sku": "13801",
+      "product": "Gemstone Tree - Citrine",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 2
+    },
+    {
+      "sku": "13079",
+      "product": "Glass Frame - You're so Lovely",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 3
+    },
+    {
+      "sku": "12073",
+      "product": "Guardian Angel Ornament",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 4
+    },
+    {
+      "sku": "14083",
+      "product": "Horizon - King Size",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 5
+    },
+    {
+      "sku": "12359",
+      "product": "Hose Spray Gun Adapter Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 9,
+      "card_position": 6
+    },
+    {
+      "sku": "12509",
+      "product": "Jade Facial Roller & Massage Stone Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 1
+    },
+    {
+      "sku": "13176",
+      "product": "Kitchen Starter Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 2
+    },
+    {
+      "sku": "11429",
+      "product": "Kleeneze Cloth Set",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 3
+    },
+    {
+      "sku": "14313",
+      "product": "Menopause Skincare - Overnight Gel Mask",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 4
+    },
+    {
+      "sku": "13101",
+      "product": "Mini Monk Candle Holder",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 5
+    },
+    {
+      "sku": "14294",
+      "product": "Nail Buffer 2pk",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 10,
+      "card_position": 6
+    },
+    {
+      "sku": "70171",
+      "product": "Neon Yellow",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 1
+    },
+    {
+      "sku": "12060",
+      "product": "Pair Pillowcases - Cream",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 2
+    },
+    {
+      "sku": "13606",
+      "product": "Pearl Pin Heads 120pk",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 3
+    },
+    {
+      "sku": "13874",
+      "product": "Peptide Restore Hair Mask",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 4
+    },
+    {
+      "sku": "13920",
+      "product": "Perfect Prep Primer",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 5
+    },
+    {
+      "sku": "13234",
+      "product": "Pet Treat Tin",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 11,
+      "card_position": 6
+    },
+    {
+      "sku": "13061",
+      "product": "Puncture Repair Kit",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 1
+    },
+    {
+      "sku": "14417",
+      "product": "Reusable Shopping Bag - Capybara",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 2
+    },
+    {
+      "sku": "13552",
+      "product": "Reusable Snack Boxes - Vintage Apple",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 3
+    },
+    {
+      "sku": "11574",
+      "product": "Round Garden Furniture Cover",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 4
+    },
+    {
+      "sku": "13529",
+      "product": "Rug - Striped",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 5
+    },
+    {
+      "sku": "13137",
+      "product": "Self-Adhesive Soap Holder",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 12,
+      "card_position": 6
+    },
+    {
+      "sku": "13614",
+      "product": "Shower Caddy",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 1
+    },
+    {
+      "sku": "13048",
+      "product": "Silicone Liner - Square",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 2
+    },
+    {
+      "sku": "13045",
+      "product": "Silicone Mitts",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 3
+    },
+    {
+      "sku": "14118",
+      "product": "Soft Padded Bath Pillow",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 4
+    },
+    {
+      "sku": "13497",
+      "product": "Specs Holder",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 5
+    },
+    {
+      "sku": "13453",
+      "product": "Step 01 - Superfood Gel Cleanser",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 13,
+      "card_position": 6
+    },
+    {
+      "sku": "14324",
+      "product": "Step 02 - Nourishing Hair Mask",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 1
+    },
+    {
+      "sku": "14325",
+      "product": "Step 03 - Hydrating Conditioner",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 2
+    },
+    {
+      "sku": "14131",
+      "product": "Sweet Dreams Dog Bed - Medium/Large",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 3
+    },
+    {
+      "sku": "14130",
+      "product": "Sweet Dreams Dog Bed - Small/Medium",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 4
+    },
+    {
+      "sku": "13918",
+      "product": "Swirl Lip Mask - Strawberry Ripple",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 5
+    },
+    {
+      "sku": "14310",
+      "product": "The Shave Dr - Daily Hydrating Cream",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 14,
+      "card_position": 6
+    },
+    {
+      "sku": "13136",
+      "product": "Tissue and Wipes Holder",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 1
+    },
+    {
+      "sku": "13096",
+      "product": "Top Voile Curtain Panels Pk2 - Blush",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 2
+    },
+    {
+      "sku": "13095",
+      "product": "Top Voile Curtain Panels Pk2 - Grey",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 3
+    },
+    {
+      "sku": "13787",
+      "product": "Traditional Wire Maze Game",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 4
+    },
+    {
+      "sku": "14299",
+      "product": "Triangle Powder Sponge",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 5
+    },
+    {
+      "sku": "11665",
+      "product": "Tumble Dryer Sheets - Spring Fresh",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 15,
+      "card_position": 6
+    },
+    {
+      "sku": "13627",
+      "product": "Twin Grater with Storage Tub",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 1
+    },
+    {
+      "sku": "14330",
+      "product": "Unicorn Clips - Set of 6",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 2
+    },
+    {
+      "sku": "13441",
+      "product": "Wax Strips - Assorted Sizes",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 3
+    },
+    {
+      "sku": "14049",
+      "product": "Wireless Doorbell & Chime",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 4
+    },
+    {
+      "sku": "13930",
+      "product": "Wooden Tower Game",
+      "stock_status_at_generation": "active",
+      "sold_out_since": "",
+      "a5_page": 16,
+      "card_position": 5
+    }
+  ]
+}
