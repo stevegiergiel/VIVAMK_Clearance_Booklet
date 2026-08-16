@@ -1,0 +1,24 @@
+VivaMK Clearance Booklet v2.21 - Booklet ID / SKU-safe overprint foundation
+
+Added:
+- Unique Booklet ID for each newly generated physical booklet edition.
+- Booklet ID stamped unobtrusively onto the A5 source and carried into the A4 imposed booklet.
+- Frozen per-edition SKU layout manifest under output/<sale>/booklet_editions/.
+- CURRENT_BOOKLET_ID.txt pointer for each sale.
+- Permanent cumulative SOLD OUT history under monitor_state/<sale>_sold_out_history.json.
+- SOLD OUT history keyed by SKU, never by card position.
+- Safe overprint generation that requires a valid Booklet ID and uses that edition's frozen SKU -> page/card mapping.
+- Validation text report beside each overprint PDF.
+- make_christmas_overprint.bat helper.
+- run_all_booklets.bat now uses build_booklet_with_id.py so new manual booklet builds are registered automatically.
+
+Safety model:
+1. SKU identifies the product.
+2. Booklet ID identifies the physical booklet edition.
+3. Position is used only after both IDs have been validated.
+4. If a Booklet ID is unknown/mismatched, overprint generation refuses to continue.
+5. Cumulative SOLD OUT history is append-only so a previously captured SOLD OUT SKU is not forgotten on a later clean scan.
+
+IMPORTANT:
+- Christmas remains on PDF source mode for this safety test.
+- Do not switch Christmas to category/live scraping until one newly registered booklet and its overprint have been checked.
