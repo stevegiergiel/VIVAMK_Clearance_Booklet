@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Author>Giergiel-PC\Steve</Author>
+    <URI>\VivaMK Daily Catalogue Check</URI>
+  </RegistrationInfo>
+
+  <Principals>
+    <Principal id="Author">
+     <UserId>SYSTEM</UserId>
+     <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+
+  <Settings>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <WakeToRun>true</WakeToRun>
+    <ExecutionTimeLimit>PT45M</ExecutionTimeLimit>
+
+    <IdleSettings>
+      <Duration>PT10M</Duration>
+      <WaitTimeout>PT1H</WaitTimeout>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+  </Settings>
+
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2026-08-13T10:45:00</StartBoundary>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\Windows\System32\cmd.exe</Command>
+      <Arguments>/d /c ""F:\VIVAMK_Clearance_Booklet\run_daily_catalogue_check.bat""</Arguments>
+    </Exec>
+  </Actions>
+</Task>
