@@ -13,9 +13,12 @@
 .brand{font-size:clamp(15px,2.2vw,20px);font-weight:800;letter-spacing:.12em;color:var(--sage);text-transform:uppercase}.title{margin:4px 0 5px;font-size:clamp(34px,7vw,72px);font-weight:900;color:var(--pink);line-height:.95}.title span{color:var(--deep)}
 .badge{display:inline-block;margin-top:8px;background:var(--pink);color:white;font-weight:900;padding:9px 16px;border-radius:999px;box-shadow:0 5px 0 var(--deep)}
 .sub{max-width:760px;margin:14px auto 0;font-size:clamp(15px,2.4vw,19px);line-height:1.45}
-.grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:24px}.card{background:#fff;border:1px solid #f0d8df;border-radius:24px;padding:10px;box-shadow:0 10px 26px rgba(78,40,51,.12);position:relative}.card:before{content:"";position:absolute;inset:8px;border-radius:18px;border:1px dashed rgba(230,24,98,.18);pointer-events:none}.card img{display:block;width:100%;height:auto;border-radius:17px;position:relative;z-index:1}.caption{position:relative;z-index:2;text-align:center;font-weight:800;color:var(--deep);padding:11px 8px 6px}
+.grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:24px}.card{background:#fff;border:1px solid #f0d8df;border-radius:24px;padding:10px;box-shadow:0 10px 26px rgba(78,40,51,.12);position:relative}.card:before{content:"";position:absolute;inset:8px;border-radius:18px;border:1px dashed rgba(230,24,98,.18);pointer-events:none}.flyer{position:relative;z-index:1}.card img{display:block;width:100%;height:auto;border-radius:17px}.caption{position:relative;z-index:2;text-align:center;font-weight:800;color:var(--deep);padding:11px 8px 6px}
+.buy{position:absolute;z-index:4;right:1.4%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:5px;text-decoration:none;background:linear-gradient(135deg,#f5256c,#bd0f49);color:#fff;font-weight:900;font-size:clamp(10px,1.55vw,14px);line-height:1;padding:8px 10px;border:2px solid rgba(255,255,255,.9);border-radius:999px;box-shadow:0 4px 10px rgba(70,15,35,.32);white-space:nowrap}.buy:hover,.buy:focus{transform:translateY(-50%) scale(1.05);outline:3px solid #ffe8a3}.buy:before{content:"♥";font-size:.9em}.buy small{font-weight:700;opacity:.9}
+.f1 .b1{top:38%}.f1 .b2{top:66%}.f1 .b3{top:94%}.f2 .b1{top:39%}.f2 .b2{top:67%}.f2 .b3{top:94%}.f3 .b1{top:45%}.f3 .b2{top:70%}
 .cta{margin:28px 0 0;text-align:center;background:linear-gradient(135deg,#3d6b57,#274d3e);color:white;border-radius:24px;padding:22px 18px;box-shadow:0 10px 26px rgba(38,75,60,.22)}.cta h2{margin:0 0 8px;font-size:clamp(22px,4vw,34px)}.cta p{margin:6px auto;max-width:720px;line-height:1.45}.cta strong{color:#ffe8a3}.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}.btn{display:inline-block;text-decoration:none;font-weight:900;border-radius:999px;padding:12px 18px;background:white;color:var(--deep)}.btn.alt{background:#ffe8a3;color:#5e4510}
 .footer{text-align:center;margin-top:16px;padding:14px 8px;color:#665c5f;font-size:13px;line-height:1.5}.footer b{color:var(--pink)}
+@media(max-width:520px){.buy{right:.8%;padding:7px 8px;border-width:1px}.buy small{display:none}}
 @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}.card:last-child{grid-column:1/-1;max-width:760px;width:100%;justify-self:center}.hero{padding-top:30px}}
 </style>
 </head>
@@ -25,18 +28,18 @@
 <div class="brand">EzeGet Special Selection</div>
 <div class="title">Petal <span>&amp;</span> Paws</div>
 <div class="badge">15% OFF SPECIALS</div>
-<p class="sub">A colourful mix of garden, outdoor and pet favourites. Browse the purpose-designed flyers below, note the product codes you want, and order while stock lasts.</p>
+<p class="sub">A colourful mix of garden, outdoor and pet favourites. Tap any <b>Buy Me</b> button beside a product to open that item search, or quote the product code when ordering.</p>
 </header>
 
 <main class="grid" aria-label="Petal and Paws promotional flyers">
-<article class="card"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/e61cc1bd-72b8-f2a8-a704-a2a7c11d4dca.jpg" alt="Petal & Paws garden specials flyer"><div class="caption">Garden favourites &amp; seasonal specials</div></article>
-<article class="card"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/b0db7664-74d4-99dc-6e98-45873e9b3e64.jpg" alt="Petal & Paws garden products flyer"><div class="caption">Practical garden ideas &amp; gifts</div></article>
-<article class="card"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/2b4c8dd9-ba41-b928-9a41-136e7fd27992.jpg" alt="Petal & Paws pet specials flyer"><div class="caption">Pet treats, toys &amp; comfort</div></article>
+<article class="card"><div class="flyer f1"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/e61cc1bd-72b8-f2a8-a704-a2a7c11d4dca.jpg" alt="Petal & Paws garden specials flyer"><a class="buy b1" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=11546">Buy Me <small>11546</small></a><a class="buy b2" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=15110">Buy Me <small>15110</small></a><a class="buy b3" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=15078">Buy Me <small>15078</small></a></div><div class="caption">Garden favourites &amp; seasonal specials</div></article>
+<article class="card"><div class="flyer f2"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/b0db7664-74d4-99dc-6e98-45873e9b3e64.jpg" alt="Petal & Paws garden products flyer"><a class="buy b1" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=14177">Buy Me <small>14177</small></a><a class="buy b2" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=60493">Buy Me <small>60493</small></a><a class="buy b3" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=13224">Buy Me <small>13224</small></a></div><div class="caption">Practical garden ideas &amp; gifts</div></article>
+<article class="card"><div class="flyer f3"><img loading="lazy" src="https://mcusercontent.com/3da674c6b6d26d21c73eb67b4/images/2b4c8dd9-ba41-b928-9a41-136e7fd27992.jpg" alt="Petal & Paws pet specials flyer"><a class="buy b1" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=13239">Buy Me <small>13239</small></a><a class="buy b2" target="_blank" rel="noopener" href="https://stevegiergiel.vivamknetwork.co.uk/catalogsearch/result/?q=15122">Buy Me <small>15122</small></a></div><div class="caption">Pet treats, toys &amp; comfort</div></article>
 </main>
 
 <section class="cta">
 <h2>Found something you like?</h2>
-<p>Quote the <strong>product code</strong> shown on the flyer. Steve &amp; Jus can help with availability and ordering.</p>
+<p>Tap a <strong>Buy Me</strong> button for the relevant product or quote the product code shown on the flyer. Steve &amp; Jus can also help with availability and ordering.</p>
 <div class="buttons"><a class="btn" href="tel:07713045597">Call / text 0771 304 5597</a><a class="btn alt" href="mailto:steve@ezeget.com?subject=Petal%20%26%20Paws%20order">Email your order</a></div>
 <p>Special prices are subject to availability and may end when stock is exhausted.</p>
 </section>
