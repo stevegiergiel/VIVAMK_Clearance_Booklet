@@ -3,11 +3,11 @@ setlocal
 cd /d "%~dp0"
 
 echo ============================================================
-echo VivaMK Daily Catalogue Monitor
+echo EzeGet Daily Catalogue Monitor
 echo %date% %time%
 echo ============================================================
 
-python vivamk_daily_monitor.py
+python run_daily_monitor_with_petals_paws.py
 set EXITCODE=%ERRORLEVEL%
 
 echo.
