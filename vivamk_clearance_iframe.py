@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.17
+# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.18
 import argparse, html, importlib.util, sys
 from pathlib import Path
+from urllib.parse import urlencode
 
 
 def load_engine():
@@ -15,6 +16,29 @@ def load_engine():
 
 def esc(v):
     return html.escape(str(v or ''), quote=True)
+
+
+def resolver_href(cfg, row, target_url):
+    """Return a generic local resolver URL for a currently-active product.
+
+    The resolver deliberately does not infer SOLD OUT from browser/network errors.
+    It uses the supplier's live SKU search at click time, which avoids hard 404
+    product links when an item disappears between scheduled snapshots.
+    """
+    sku = str(row.sku or '').strip()
+    sale = cfg.get('sale', {})
+    search_template = cfg.get('search_url_template', '')
+    live_search = search_template.format(sku=sku) if search_template and sku else ''
+    fallback = cfg.get('order_url') or sale.get('source_url') or cfg.get('base_url', '')
+    params = urlencode({
+        'sku': sku,
+        'name': str(row.product or ''),
+        'sale': str(sale.get('display_name') or ''),
+        'target': str(target_url or ''),
+        'search': str(live_search or ''),
+        'fallback': str(fallback or ''),
+    })
+    return f'../resolve/?{params}'
 
 
 def main():
@@ -37,22 +61,11 @@ def main():
 
     rows = m.merge_monitor_state(rows, args.state_file)
 
-    # Never publish an empty/no-image iframe card.
-    #
-    # ACTIVE:
-    #   keep only if we have either a live image URL or a known-good local image.
-    #
-    # SOLD OUT:
-    #   keep only if the monitor has a known-good cached image from when the
-    #   product was previously ACTIVE. This preserves the intentional SOLD OUT
-    #   experience without inventing a product card for a PDF-only/stale SKU
-    #   that was never successfully captured.
     publishable_rows = []
     for r in rows:
         sold_out = getattr(r, 'stock_status', 'active') == 'sold_out'
         local_image_ok = bool(r.image_file and Path(r.image_file).exists())
         live_image_ok = bool((r.image_url or '').strip())
-
         if sold_out:
             if local_image_ok:
                 publishable_rows.append(r)
@@ -65,8 +78,6 @@ def main():
         sold_out = getattr(r, 'stock_status', 'active') == 'sold_out'
         local_image_ok = bool(r.image_file and Path(r.image_file).exists())
 
-        # Embed the cached file when SOLD OUT, or whenever the live URL is absent.
-        # Otherwise prefer the live CDN image URL for smaller HTML.
         if local_image_ok and (sold_out or not (r.image_url or '').strip()):
             import base64, mimetypes
             mime = mimetypes.guess_type(r.image_file)[0] or 'image/jpeg'
@@ -75,7 +86,11 @@ def main():
             img = esc(r.image_url)
         photo = f'<img src="{img}" alt="{esc(r.product)}" loading="lazy">' if img else ''
         overlay = '<span class="soldout-ribbon">SOLD OUT</span>' if sold_out else ''
-        action = '<span class="soldout-button">SOLD OUT</span>' if sold_out else f'<a href="{esc(url)}" target="_blank" rel="noopener">BUY ME</a>'
+        if sold_out:
+            action = '<span class="soldout-button">SOLD OUT</span>'
+        else:
+            resolve_url = resolver_href(cfg, r, url)
+            action = f'<a href="{esc(resolve_url)}" target="_blank" rel="noopener">BUY ME</a>'
         klass = ' class="soldout-card"' if sold_out else ''
         cards.append(
             f'<article{klass}><div class="photo">' + photo +
