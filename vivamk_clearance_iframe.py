@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.18
+# VIVAMK CLEARANCE IFRAME ENGINE VERSION v2.19
 import argparse, html, importlib.util, sys
 from pathlib import Path
 from urllib.parse import urlencode
@@ -38,7 +38,8 @@ def resolver_href(cfg, row, target_url):
         'search': str(live_search or ''),
         'fallback': str(fallback or ''),
     })
-    return f'../resolve/?{params}'
+    # Explicit index.html works both from local file:// testing and GitHub Pages.
+    return f'../resolve/index.html?{params}'
 
 
 def main():
