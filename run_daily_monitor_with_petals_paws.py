@@ -6,8 +6,8 @@ stock engine or redefine status semantics; it reuses vivamk_daily_monitor.py
 while the canonical shared stock-data migration is being validated.
 
 Operational improvements provided here:
-- Discover monitorable catalogues from configs/*.json instead of maintaining a
-  second hard-coded catalogue registry.
+- Prefer configs/catalogue_manifest.json as the declarative catalogue registry,
+  while retaining safe config-directory discovery as a compatibility fallback.
 - Add a MONITORED CATALOGUES section to every heartbeat so successful no-change
   runs prove which catalogues were actually included.
 - Guard the legacy publisher against unrelated files under site/ causing an
@@ -28,60 +28,105 @@ import vivamk_daily_monitor as monitor
 
 _ORIGINAL_GIT_PUBLISH = monitor.git_publish
 _ORIGINAL_SEND_EMAIL = monitor.send_email
-_DISCOVERED: list[dict[str, str]] = []
+_DISCOVERED: list[dict[str, Any]] = []
+MANIFEST_NAME = "catalogue_manifest.json"
 
 
-def discover_sale_configs(config_dir: Path | None = None) -> list[dict[str, str]]:
-    """Return valid, enabled catalogue configs found on disk.
+def _read_config(path: Path) -> dict[str, Any] | None:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return data if isinstance(data, dict) else None
 
-    A JSON file is monitorable when it contains a sale id/display name and a
-    supported data_source mode (pdf/category).  `monitor.enabled: false` can be
-    used to keep a valid catalogue config out of the daily run deliberately.
 
-    Invalid/unrelated JSON files are ignored rather than becoming accidental
-    catalogues.
+def _catalogue_record(path: Path, manifest_entry: dict[str, Any] | None = None) -> dict[str, Any] | None:
+    cfg = _read_config(path)
+    if not cfg:
+        return None
+
+    sale = cfg.get("sale") or {}
+    data_source = cfg.get("data_source") or {}
+    monitor_cfg = cfg.get("monitor") or {}
+    sale_id = str(sale.get("id") or "").strip()
+    display_name = str(sale.get("display_name") or "").strip()
+    mode = str(data_source.get("mode") or "").strip().lower()
+
+    if not sale_id or not display_name or mode not in {"pdf", "category"}:
+        return None
+    if monitor_cfg.get("enabled", True) is False:
+        return None
+
+    entry = manifest_entry or {}
+    source = ""
+    if mode == "pdf":
+        source = str(data_source.get("price_pdf") or "").strip()
+    else:
+        source = str(sale.get("source_url") or cfg.get("category_url") or "").strip()
+
+    return {
+        "filename": path.name,
+        "sale_id": sale_id,
+        "display_name": display_name,
+        "mode": mode,
+        "source": source,
+        "live_url": str(entry.get("live_url") or sale.get("source_url") or "").strip(),
+        "operational_source": str(entry.get("operational_source") or mode).strip().lower(),
+        "generate_iframe": bool(entry.get("generate_iframe", True)),
+        # New catalogues default to no print. Existing catalogues are explicitly
+        # true in the manifest so introducing this control is backwards-safe.
+        "generate_print": bool(entry.get("generate_print", False)),
+        "migration": str(entry.get("migration") or "").strip(),
+        "iframe_path": str(cfg.get("iframe_path") or sale_id).strip(),
+    }
+
+
+def discover_sale_configs(config_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Return valid, enabled catalogue configs.
+
+    When catalogue_manifest.json exists, it is authoritative for catalogue
+    membership/order/output flags. The underlying per-sale JSON files remain
+    authoritative for layout/theme and current operational data-source mechanics.
+
+    If the manifest is absent, fall back to the previous safe configs/*.json
+    discovery behaviour for rollback/backwards compatibility.
     """
     root = config_dir or monitor.CONFIG_DIR
-    found: list[dict[str, str]] = []
+    manifest_path = root / MANIFEST_NAME
+    found: list[dict[str, Any]] = []
+
+    manifest = _read_config(manifest_path) if manifest_path.exists() else None
+    if manifest:
+        defaults = manifest.get("defaults") or {}
+        entries = manifest.get("catalogues") or []
+        for raw in entries:
+            if not isinstance(raw, dict):
+                continue
+            filename = str(raw.get("config") or "").strip()
+            if not filename:
+                continue
+            merged = dict(defaults)
+            merged.update(raw)
+            rec = _catalogue_record(root / filename, merged)
+            if rec:
+                found.append(rec)
+        return found
 
     for path in sorted(root.glob("*.json")):
-        try:
-            cfg = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
+        if path.name == MANIFEST_NAME:
             continue
-
-        sale = cfg.get("sale") or {}
-        data_source = cfg.get("data_source") or {}
-        monitor_cfg = cfg.get("monitor") or {}
-        sale_id = str(sale.get("id") or "").strip()
-        display_name = str(sale.get("display_name") or "").strip()
-        mode = str(data_source.get("mode") or "").strip().lower()
-
-        if not sale_id or not display_name or mode not in {"pdf", "category"}:
-            continue
-        if monitor_cfg.get("enabled", True) is False:
-            continue
-
-        source = ""
-        if mode == "pdf":
-            source = str(data_source.get("price_pdf") or "").strip()
-        else:
-            source = str(sale.get("source_url") or cfg.get("category_url") or "").strip()
-
-        found.append({
-            "filename": path.name,
-            "sale_id": sale_id,
-            "display_name": display_name,
-            "mode": mode,
-            "source": source,
-            "iframe_path": str(cfg.get("iframe_path") or sale_id).strip(),
-        })
+        rec = _catalogue_record(path)
+        if rec:
+            # Compatibility mode preserves legacy behaviour for existing configs.
+            rec["generate_iframe"] = True
+            rec["generate_print"] = True
+            found.append(rec)
 
     return found
 
 
 def configure_monitor() -> list[str]:
-    """Replace the legacy hard-coded list with the catalogue configs on disk."""
+    """Replace the legacy hard-coded list with declarative catalogue discovery."""
     global _DISCOVERED
     _DISCOVERED = discover_sale_configs()
     monitor.SALE_CONFIGS[:] = [item["filename"] for item in _DISCOVERED]
@@ -144,12 +189,16 @@ def send_email_with_catalogue_summary(
     else:
         for item in _DISCOVERED:
             source_note = f" - {item['source']}" if item["source"] else ""
+            output_note = (
+                f" | iframe={'YES' if item['generate_iframe'] else 'NO'}"
+                f" | print={'YES' if item['generate_print'] else 'NO'}"
+            )
             lines.append(
-                f"  OK: {item['display_name']} [{item['mode'].upper()}]{source_note}"
+                f"  OK: {item['display_name']} [{item['mode'].upper()}]{source_note}{output_note}"
             )
     lines.extend([
         "",
-        f"Catalogue configs discovered automatically from: {monitor.CONFIG_DIR}",
+        f"Catalogue registry: {monitor.CONFIG_DIR / MANIFEST_NAME}",
     ])
     _ORIGINAL_SEND_EMAIL(settings, subject, "\n".join(lines))
 
@@ -157,7 +206,7 @@ def send_email_with_catalogue_summary(
 def main() -> int:
     configured = configure_monitor()
     if not configured:
-        raise RuntimeError("No monitorable catalogue configs were discovered in configs/.")
+        raise RuntimeError("No monitorable catalogues were discovered.")
     monitor.git_publish = safe_git_publish
     monitor.send_email = send_email_with_catalogue_summary
     return monitor.main()
