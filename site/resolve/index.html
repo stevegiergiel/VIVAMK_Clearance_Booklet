@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Item availability | EzeGet</title>
+  <style>
+    :root{--green:#064629;--gold:#E3B341;--red:#B5121B;--cream:#FFF7E2}
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f1e8;color:#222;min-height:100vh;display:grid;place-items:center;padding:18px}
+    .panel{width:min(620px,100%);background:#fff;border:1px solid #ddd0b8;border-radius:16px;box-shadow:0 8px 30px #0002;overflow:hidden}
+    header{background:var(--green);color:#fff;text-align:center;padding:22px;border-bottom:4px solid var(--gold)}main{padding:26px}h1{margin:0;font-size:24px}h2{color:var(--green);margin:0 0 8px}.note{background:var(--cream);border-radius:10px;padding:14px;margin:18px 0;line-height:1.5}a.button{display:block;text-decoration:none;text-align:center;border-radius:9px;padding:12px;font-weight:900;margin-top:10px}.primary{background:var(--red);color:#fff}.secondary{background:#eee;color:#222}.small{font-size:12px;color:#666;margin-top:16px;line-height:1.4}[hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <section class="panel" id="panel" hidden>
+    <header><h1>EzeGet Clearance</h1></header>
+    <main>
+      <h2 id="title">This item is temporarily unavailable</h2>
+      <div id="product"></div>
+      <div class="note" id="message">Please choose an alternative product from the current specials, or retry tomorrow.</div>
+      <a id="fallback" class="button primary" href="#">FIND AN ALTERNATIVE</a>
+      <a id="retry" class="button secondary" href="#">RETRY PRODUCT PAGE</a>
+      <p class="small">Thank you for shopping with EzeGet.</p>
+    </main>
+  </section>
+<script>
+(async () => {
+  const p = new URLSearchParams(location.search);
+  const sku = (p.get('sku') || '').trim();
+  const name = (p.get('name') || '').trim();
+  const sale = (p.get('sale') || '').trim();
+  const allowedSupplierHost = 'stevegiergiel.vivamknetwork.co.uk';
+
+  function safeSupplierUrl(raw) {
+    if (!raw) return '';
+    try {
+      const u = new URL(raw);
+      return u.protocol === 'https:' && u.hostname === allowedSupplierHost ? u.href : '';
+    } catch (_) { return ''; }
+  }
+  function safeStockUrl(raw) {
+    if (!raw) return '';
+    try {
+      const u = new URL(raw);
+      return u.protocol === 'https:' && (u.hostname === 'raw.githubusercontent.com' || u.hostname.endsWith('.github.io')) ? u.href : '';
+    } catch (_) { return ''; }
+  }
+
+  const target = safeSupplierUrl(p.get('target'));
+  const fallback = safeSupplierUrl(p.get('fallback'));
+  const stockUrl = safeStockUrl(p.get('stock'));
+
+  function reveal(record) {
+    const panel = document.getElementById('panel');
+    const title = document.getElementById('title');
+    const message = document.getElementById('message');
+    document.getElementById('product').textContent = [name, sku ? `SKU ${sku}` : '', sale].filter(Boolean).join(' · ');
+    const status = String(record?.status || '').toUpperCase();
+    if (status === 'SOLD_OUT' || status === 'NOT_CURRENTLY_LISTED') {
+      title.textContent = 'Sorry, this item is no longer available';
+      message.textContent = 'Please choose an alternative product from the current specials.';
+    } else if (status === 'CHECK_REQUIRED') {
+      title.textContent = 'We cannot confirm this item right now';
+      message.textContent = 'Please choose an alternative product for now, or retry tomorrow.';
+    } else {
+      title.textContent = 'This item is temporarily unavailable';
+      const back = record?.expected_back ? ` Expected back: ${record.expected_back}.` : '';
+      message.textContent = `Please choose an alternative product from the current specials, or retry tomorrow.${back}`;
+    }
+    const fb = document.getElementById('fallback');
+    const retry = document.getElementById('retry');
+    if (fallback) fb.href = fallback; else fb.hidden = true;
+    if (target) retry.href = target; else retry.hidden = true;
+    panel.hidden = false;
+  }
+
+  const failOpen = () => {
+    if (target) location.replace(target);
+    else if (fallback) location.replace(fallback);
+    else reveal({status:'CHECK_REQUIRED'});
+  };
+
+  // Local/manual acceptance hook only. Production iframe links never include
+  // test_status, but it lets us verify friendly states without corrupting the
+  // canonical shared stock snapshot.
+  const testStatus = (p.get('test_status') || '').trim().toUpperCase();
+  if (['OUT_OF_STOCK','SOLD_OUT','NOT_CURRENTLY_LISTED','CHECK_REQUIRED'].includes(testStatus)) {
+    return reveal({status:testStatus, expected_back:p.get('expected_back') || ''});
+  }
+
+  if (!sku || !stockUrl) return failOpen();
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 900);
+    const response = await fetch(stockUrl, {cache:'no-store', signal:controller.signal});
+    clearTimeout(timeout);
+    if (!response.ok) return failOpen();
+    const data = await response.json();
+
+    // The shared repo currently carries a sample placeholder until its daily
+    // generator is switched on. Never use sample/undated data to block a sale.
+    const generated = String(data.generated_at || '');
+    if (!generated || generated.toUpperCase().includes('SAMPLE')) return failOpen();
+    const generatedMs = Date.parse(generated);
+    if (!Number.isFinite(generatedMs) || Date.now() - generatedMs > 36 * 60 * 60 * 1000) return failOpen();
+
+    const products = Array.isArray(data.products) ? data.products : [];
+    const record = products.find(x => String(x?.sku || '').trim() === sku);
+    if (!record) return failOpen();
+
+    const status = String(record.status || '').toUpperCase();
+    if (['OUT_OF_STOCK','SOLD_OUT','NOT_CURRENTLY_LISTED','CHECK_REQUIRED'].includes(status)) {
+      return reveal(record);
+    }
+    return failOpen();
+  } catch (_) {
+    return failOpen();
+  }
+})();
+</script>
+</body>
+</html>
