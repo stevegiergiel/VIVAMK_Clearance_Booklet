@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Checking item availability | EzeGet</title>
+  <style>
+    :root{--green:#064629;--gold:#E3B341;--red:#B5121B;--cream:#FFF7E2}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:#f5f1e8;color:#222;min-height:100vh;display:grid;place-items:center;padding:18px}
+    .panel{width:min(620px,100%);background:#fff;border:1px solid #ddd0b8;border-radius:16px;box-shadow:0 8px 30px #0002;overflow:hidden}
+    header{background:var(--green);color:#fff;text-align:center;padding:22px;border-bottom:4px solid var(--gold)}
+    main{padding:26px}
+    h1{margin:0;font-size:24px} h2{color:var(--green);margin:0 0 8px}
+    .sku{font-weight:900}.note{background:var(--cream);border-radius:10px;padding:12px;margin:18px 0;line-height:1.45}
+    .spinner{width:28px;height:28px;border:4px solid #ddd;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:15px auto}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    a.button{display:block;text-decoration:none;text-align:center;border-radius:9px;padding:12px;font-weight:900;margin-top:10px}
+    #check{background:var(--red);color:#fff}.secondary{background:#eee;color:#222}.small{font-size:12px;color:#666;margin-top:16px;line-height:1.4}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <section class="panel">
+    <header><h1>EzeGet Clearance</h1></header>
+    <main>
+      <h2 id="title">Checking latest availability…</h2>
+      <div id="product"></div>
+      <div class="spinner" id="spinner"></div>
+      <div class="note" id="message">We are checking the supplier's live catalogue for this item before sending you on.</div>
+      <a id="check" class="button" href="#">CHECK CURRENT AVAILABILITY</a>
+      <a id="fallback" class="button secondary" href="#" hidden>VIEW CURRENT SPECIALS</a>
+      <a id="snapshot" class="button secondary" href="#" hidden>OPEN PRODUCT PAGE FROM LAST SNAPSHOT</a>
+      <p class="small">Availability can change between catalogue refreshes. A failed or missing page is never treated here as proof that an item is permanently sold out.</p>
+    </main>
+  </section>
+<script>
+(() => {
+  const p = new URLSearchParams(location.search);
+  const sku = (p.get('sku') || '').trim();
+  const name = (p.get('name') || '').trim();
+  const sale = (p.get('sale') || '').trim();
+  const allowedHost = 'stevegiergiel.vivamknetwork.co.uk';
+
+  function safeUrl(raw) {
+    if (!raw) return '';
+    try {
+      const u = new URL(raw);
+      return u.protocol === 'https:' && u.hostname === allowedHost ? u.href : '';
+    } catch (_) { return ''; }
+  }
+
+  const search = safeUrl(p.get('search'));
+  const target = safeUrl(p.get('target'));
+  const fallback = safeUrl(p.get('fallback'));
+  const destination = search || target || fallback;
+
+  document.getElementById('product').textContent = [name, sku ? `SKU ${sku}` : '', sale].filter(Boolean).join(' · ');
+
+  const check = document.getElementById('check');
+  const fallbackLink = document.getElementById('fallback');
+  const snapshot = document.getElementById('snapshot');
+  const spinner = document.getElementById('spinner');
+  const message = document.getElementById('message');
+
+  if (search) {
+    check.href = search;
+    check.textContent = 'CHECK CURRENT AVAILABILITY';
+  } else if (target) {
+    check.href = target;
+    check.textContent = 'OPEN ITEM';
+    message.textContent = 'A live SKU-search link was not available, so this will use the last known product page.';
+  } else if (fallback) {
+    check.href = fallback;
+    check.textContent = 'VIEW CURRENT SPECIALS';
+    message.textContent = 'We could not resolve a safe product link. Please view the current specials instead.';
+  } else {
+    check.hidden = true;
+    spinner.hidden = true;
+    message.textContent = 'Sorry, we cannot safely open this item at the moment.';
+  }
+
+  if (fallback && fallback !== destination) {
+    fallbackLink.href = fallback;
+    fallbackLink.hidden = false;
+  }
+  if (target && search && target !== search) {
+    snapshot.href = target;
+    snapshot.hidden = false;
+  }
+
+  // For a normal BUY ME click, use the supplier's live SKU search rather than
+  // a potentially stale direct product URL. This avoids hard 404s without
+  // claiming that a browser/network failure proves SOLD OUT.
+  if (search) {
+    setTimeout(() => { location.replace(search); }, 1100);
+  } else {
+    spinner.hidden = true;
+  }
+})();
+</script>
+</body>
+</html>
