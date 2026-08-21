@@ -50,12 +50,6 @@
   const fallback = safeSupplierUrl(p.get('fallback'));
   const stockUrl = safeStockUrl(p.get('stock'));
 
-  const failOpen = () => {
-    if (target) location.replace(target);
-    else if (fallback) location.replace(fallback);
-    else reveal({status:'CHECK_REQUIRED'});
-  };
-
   function reveal(record) {
     const panel = document.getElementById('panel');
     const title = document.getElementById('title');
@@ -78,6 +72,20 @@
     if (fallback) fb.href = fallback; else fb.hidden = true;
     if (target) retry.href = target; else retry.hidden = true;
     panel.hidden = false;
+  }
+
+  const failOpen = () => {
+    if (target) location.replace(target);
+    else if (fallback) location.replace(fallback);
+    else reveal({status:'CHECK_REQUIRED'});
+  };
+
+  // Local/manual acceptance hook only. Production iframe links never include
+  // test_status, but it lets us verify friendly states without corrupting the
+  // canonical shared stock snapshot.
+  const testStatus = (p.get('test_status') || '').trim().toUpperCase();
+  if (['OUT_OF_STOCK','SOLD_OUT','NOT_CURRENTLY_LISTED','CHECK_REQUIRED'].includes(testStatus)) {
+    return reveal({status:testStatus, expected_back:p.get('expected_back') || ''});
   }
 
   if (!sku || !stockUrl) return failOpen();
