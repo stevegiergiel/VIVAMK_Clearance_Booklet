@@ -5,6 +5,12 @@ from pathlib import Path
 from urllib.parse import urlencode
 
 
+SHARED_STOCK_SNAPSHOT_URL = (
+    'https://raw.githubusercontent.com/stevegiergiel/'
+    'VivaMk_Out_Of_Stock/main/site/data/out_of_stock.json'
+)
+
+
 def load_engine():
     p = Path(__file__).with_name('vivamk_clearance_booklet.py')
     spec = importlib.util.spec_from_file_location('booklet_engine', p)
@@ -19,26 +25,27 @@ def esc(v):
 
 
 def resolver_href(cfg, row, target_url):
-    """Return a generic local resolver URL for a currently-active product.
+    """Return the shared BUY ME resolver URL for a currently-active product.
 
-    The resolver deliberately does not infer SOLD OUT from browser/network errors.
-    It uses the supplier's live SKU search at click time, which avoids hard 404
-    product links when an item disappears between scheduled snapshots.
+    The resolver checks the canonical shared stock snapshot silently. A healthy
+    product is sent straight to its last-known-good product URL without showing
+    the resolver UI. The UI is only shown for a credible unavailable status.
+    If shared data is missing, stale or invalid, the resolver fails open to the
+    last-known-good target; it never invents SOLD OUT from a fetch failure.
     """
     sku = str(row.sku or '').strip()
     sale = cfg.get('sale', {})
-    search_template = cfg.get('search_url_template', '')
-    live_search = search_template.format(sku=sku) if search_template and sku else ''
     fallback = cfg.get('order_url') or sale.get('source_url') or cfg.get('base_url', '')
     params = urlencode({
         'sku': sku,
         'name': str(row.product or ''),
         'sale': str(sale.get('display_name') or ''),
         'target': str(target_url or ''),
-        'search': str(live_search or ''),
         'fallback': str(fallback or ''),
+        'stock': str(cfg.get('shared_stock_snapshot_url') or SHARED_STOCK_SNAPSHOT_URL),
     })
-    # Explicit index.html works both from local file:// testing and GitHub Pages.
+    # Explicit index.html works both from file:// during local testing and on
+    # GitHub Pages, avoiding Windows directory-index listings.
     return f'../resolve/index.html?{params}'
 
 
