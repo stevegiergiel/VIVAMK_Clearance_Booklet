@@ -12,11 +12,15 @@ Operational improvements provided here:
   runs prove which catalogues were actually included.
 - Guard the legacy publisher against unrelated files under site/ causing an
   empty git commit failure.
+- Under GitHub Actions, commit changed iframe output locally and let the workflow
+  publish it through a short-lived PR rather than pushing directly through main
+  branch protection.
 """
 
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -105,6 +109,27 @@ def safe_git_publish(
             lines,
         )
         return "Iframe rebuilt; affected generated HTML was unchanged so no Git push was needed."
+
+    if os.environ.get("GITHUB_ACTIONS", "").strip().lower() == "true":
+        monitor.run(["git", "add", *site_files])
+        staged = monitor.run(
+            ["git", "diff", "--cached", "--quiet"], check=False
+        ).returncode
+        if staged == 0:
+            monitor.log("Affected iframe HTML produced no staged changes.", lines)
+            return "Iframe rebuilt; generated HTML was unchanged so no publish was needed."
+        monitor.run([
+            "git", "commit", "-m",
+            "Daily catalogue monitor: refresh affected iframe pages",
+        ])
+        monitor.log(
+            "GitHub Actions: affected iframe pages committed locally for workflow publishing.",
+            lines,
+        )
+        return (
+            "Affected iframe pages were committed by GitHub Actions; "
+            "the workflow will publish them through a protected-branch PR."
+        )
 
     return _ORIGINAL_GIT_PUBLISH(affected_iframe_paths, settings, lines)
 
