@@ -8,6 +8,7 @@ while the canonical shared stock-data migration is being validated.
 Operational improvements provided here:
 - Prefer configs/catalogue_manifest.json as the declarative catalogue registry,
   while retaining safe config-directory discovery as a compatibility fallback.
+- Honour per-catalogue iframe/print output policy from the manifest.
 - Add a MONITORED CATALOGUES section to every heartbeat so successful no-change
   runs prove which catalogues were actually included.
 - Guard the legacy publisher against unrelated files under site/ causing an
@@ -21,6 +22,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +30,7 @@ import vivamk_daily_monitor as monitor
 
 _ORIGINAL_GIT_PUBLISH = monitor.git_publish
 _ORIGINAL_SEND_EMAIL = monitor.send_email
+_ORIGINAL_REBUILD = monitor.rebuild
 _DISCOVERED: list[dict[str, Any]] = []
 MANIFEST_NAME = "catalogue_manifest.json"
 
@@ -133,14 +136,69 @@ def configure_monitor() -> list[str]:
     return list(monitor.SALE_CONFIGS)
 
 
+def _record_for_config(cfg_path: Path) -> dict[str, Any] | None:
+    for item in _DISCOVERED:
+        if item["filename"] == cfg_path.name:
+            return item
+    return None
+
+
+def rebuild_with_output_policy(
+    cfg_path: Path, iframe_path: str, state_file: Path, lines: list[str]
+) -> None:
+    """Regenerate only outputs enabled for this catalogue in the manifest."""
+    item = _record_for_config(cfg_path)
+    if item is None:
+        # Safe compatibility fallback: old behaviour is both outputs.
+        return _ORIGINAL_REBUILD(cfg_path, iframe_path, state_file, lines)
+
+    if item["generate_print"]:
+        monitor.log(f"Rebuilding booklet: {cfg_path.name}", lines)
+        cp = monitor.run([
+            sys.executable, "vivamk_clearance_booklet.py",
+            "--config", str(cfg_path), "--refresh",
+            "--state-file", str(state_file),
+        ])
+        if cp.stdout:
+            lines.extend(cp.stdout.rstrip().splitlines())
+        if cp.stderr:
+            lines.extend(cp.stderr.rstrip().splitlines())
+    else:
+        monitor.log(f"Skipping print booklet by manifest policy: {cfg_path.name}", lines)
+
+    if item["generate_iframe"]:
+        monitor.log(f"Rebuilding iframe: {cfg_path.name}", lines)
+        cp = monitor.run([
+            sys.executable, "vivamk_clearance_iframe.py",
+            "--config", str(cfg_path),
+            "--state-file", str(state_file),
+        ])
+        if cp.stdout:
+            lines.extend(cp.stdout.rstrip().splitlines())
+        if cp.stderr:
+            lines.extend(cp.stderr.rstrip().splitlines())
+    else:
+        monitor.log(f"Skipping iframe by manifest policy: {cfg_path.name}", lines)
+
+
+def _iframe_enabled_paths(affected_iframe_paths: list[str]) -> list[str]:
+    enabled = {
+        item["iframe_path"]
+        for item in _DISCOVERED
+        if item.get("generate_iframe", True)
+    }
+    return [path for path in affected_iframe_paths if path in enabled]
+
+
 def safe_git_publish(
     affected_iframe_paths: list[str],
     settings: dict[str, Any],
     lines: list[str],
 ) -> str:
-    """Publish only when one of the specifically affected iframe files changed."""
+    """Publish only specifically affected iframe files that are enabled."""
+    affected_iframe_paths = _iframe_enabled_paths(affected_iframe_paths)
     if not affected_iframe_paths:
-        return "No iframe changes required."
+        return "No iframe changes required by catalogue output policy."
 
     site_files = [f"site/{path}/index.html" for path in affected_iframe_paths]
     status = monitor.run(
@@ -179,10 +237,46 @@ def safe_git_publish(
     return _ORIGINAL_GIT_PUBLISH(affected_iframe_paths, settings, lines)
 
 
+def _rewrite_output_messages(body: str) -> str:
+    """Make heartbeat rebuild/reprint wording match each catalogue output policy."""
+    by_name = {item["display_name"]: item for item in _DISCOVERED}
+    out: list[str] = []
+    current: dict[str, Any] | None = None
+
+    for line in body.splitlines():
+        if line.endswith(":") and line[:-1] in by_name:
+            current = by_name[line[:-1]]
+            out.append(line)
+            continue
+
+        if current and line == "  Booklet and iframe regenerated successfully.":
+            do_print = current["generate_print"]
+            do_iframe = current["generate_iframe"]
+            if do_print and do_iframe:
+                out.append(line)
+            elif do_print:
+                out.append("  Print booklet regenerated successfully; iframe generation disabled by config.")
+            elif do_iframe:
+                out.append("  Iframe regenerated successfully; print generation disabled by config.")
+            else:
+                out.append("  No presentation output regenerated; both print and iframe are disabled by config.")
+            continue
+
+        if current and line == "  ACTION: reprint this catalogue.":
+            if current["generate_print"]:
+                out.append(line)
+            continue
+
+        out.append(line)
+
+    return "\n".join(out)
+
+
 def send_email_with_catalogue_summary(
     settings: dict[str, Any], subject: str, body: str
 ) -> None:
-    """Append proof of the catalogue population to every heartbeat email."""
+    """Append proof of catalogue population and output policy to every heartbeat."""
+    body = _rewrite_output_messages(body)
     lines = [body.rstrip(), "", "MONITORED CATALOGUES"]
     if not _DISCOVERED:
         lines.append("  WARNING: no monitorable catalogue configs were discovered.")
@@ -207,6 +301,7 @@ def main() -> int:
     configured = configure_monitor()
     if not configured:
         raise RuntimeError("No monitorable catalogues were discovered.")
+    monitor.rebuild = rebuild_with_output_policy
     monitor.git_publish = safe_git_publish
     monitor.send_email = send_email_with_catalogue_summary
     return monitor.main()
