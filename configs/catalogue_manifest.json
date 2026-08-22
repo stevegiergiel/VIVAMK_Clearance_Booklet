@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "generate_iframe": true,
+    "generate_print": false
+  },
+  "catalogues": [
+    {
+      "config": "christmas.json",
+      "sale_id": "christmas",
+      "live_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/christmas-sale.html",
+      "operational_source": "pdf",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "shadow_compare"
+    },
+    {
+      "config": "mega_sale.json",
+      "sale_id": "mega_sale",
+      "live_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/mega-sale.html",
+      "operational_source": "category",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "live"
+    },
+    {
+      "config": "personalised.json",
+      "sale_id": "personalised",
+      "live_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/persgiftssale.html",
+      "operational_source": "category",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "live"
+    },
+    {
+      "config": "petals_paws_specials.json",
+      "sale_id": "petals_paws_specials",
+      "live_url": "",
+      "operational_source": "pdf",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "awaiting_live_url"
+    },
+    {
+      "config": "pets.json",
+      "sale_id": "pets",
+      "live_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/petsale.html",
+      "operational_source": "category",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "live"
+    },
+    {
+      "config": "winter_warmers.json",
+      "sale_id": "winter_warmers",
+      "live_url": "https://stevegiergiel.vivamknetwork.co.uk/clearance/winter-warmers-sale.html",
+      "operational_source": "category",
+      "generate_iframe": true,
+      "generate_print": true,
+      "migration": "live"
+    }
+  ]
+}
