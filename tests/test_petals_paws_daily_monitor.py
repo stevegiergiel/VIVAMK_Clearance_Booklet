@@ -3,6 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 
 class DynamicDailyMonitorRegistrationTests(unittest.TestCase):
@@ -10,7 +11,9 @@ class DynamicDailyMonitorRegistrationTests(unittest.TestCase):
         self.wrapper = importlib.import_module("run_daily_monitor_with_petals_paws")
         self.monitor = self.wrapper.monitor
         self.original = list(self.monitor.SALE_CONFIGS)
+        self.original_discovered = list(self.wrapper._DISCOVERED)
         self.addCleanup(lambda: self.monitor.SALE_CONFIGS.__setitem__(slice(None), self.original))
+        self.addCleanup(lambda: setattr(self.wrapper, "_DISCOVERED", self.original_discovered))
 
     def test_discovers_petals_paws_and_existing_catalogues_from_manifest(self):
         discovered = self.wrapper.discover_sale_configs()
@@ -88,6 +91,74 @@ class DynamicDailyMonitorRegistrationTests(unittest.TestCase):
             self.assertEqual(len(discovered), 1)
             self.assertTrue(discovered[0]["generate_iframe"])
             self.assertFalse(discovered[0]["generate_print"])
+
+    def test_rebuild_iframe_only_skips_booklet(self):
+        self.wrapper._DISCOVERED = [{
+            "filename": "new_sale.json",
+            "display_name": "New Sale",
+            "iframe_path": "new-sale",
+            "generate_iframe": True,
+            "generate_print": False,
+        }]
+        commands = []
+        original_run = self.monitor.run
+        self.monitor.run = lambda cmd, **kwargs: (commands.append(cmd) or SimpleNamespace(stdout="", stderr=""))
+        self.addCleanup(lambda: setattr(self.monitor, "run", original_run))
+
+        self.wrapper.rebuild_with_output_policy(
+            Path("configs/new_sale.json"), "new-sale", Path("state.json"), []
+        )
+
+        rendered = [" ".join(cmd) for cmd in commands]
+        self.assertEqual(len(rendered), 1)
+        self.assertIn("vivamk_clearance_iframe.py", rendered[0])
+        self.assertNotIn("vivamk_clearance_booklet.py", rendered[0])
+
+    def test_rebuild_print_only_skips_iframe(self):
+        self.wrapper._DISCOVERED = [{
+            "filename": "print_sale.json",
+            "display_name": "Print Sale",
+            "iframe_path": "print-sale",
+            "generate_iframe": False,
+            "generate_print": True,
+        }]
+        commands = []
+        original_run = self.monitor.run
+        self.monitor.run = lambda cmd, **kwargs: (commands.append(cmd) or SimpleNamespace(stdout="", stderr=""))
+        self.addCleanup(lambda: setattr(self.monitor, "run", original_run))
+
+        self.wrapper.rebuild_with_output_policy(
+            Path("configs/print_sale.json"), "print-sale", Path("state.json"), []
+        )
+
+        rendered = [" ".join(cmd) for cmd in commands]
+        self.assertEqual(len(rendered), 1)
+        self.assertIn("vivamk_clearance_booklet.py", rendered[0])
+        self.assertNotIn("vivamk_clearance_iframe.py", rendered[0])
+
+    def test_iframe_publish_paths_respect_manifest_policy(self):
+        self.wrapper._DISCOVERED = [
+            {"iframe_path": "alpha", "generate_iframe": True},
+            {"iframe_path": "beta", "generate_iframe": False},
+        ]
+        self.assertEqual(self.wrapper._iframe_enabled_paths(["alpha", "beta"]), ["alpha"])
+
+    def test_heartbeat_reprint_wording_respects_print_policy(self):
+        self.wrapper._DISCOVERED = [{
+            "display_name": "Iframe Only",
+            "generate_iframe": True,
+            "generate_print": False,
+        }]
+        body = (
+            "CATALOGUE STATUS CHANGES\n\n"
+            "Iframe Only:\n"
+            "  SOLD OUT: 123 - Example\n"
+            "  Booklet and iframe regenerated successfully.\n"
+            "  ACTION: reprint this catalogue.\n"
+        )
+        rewritten = self.wrapper._rewrite_output_messages(body)
+        self.assertIn("Iframe regenerated successfully; print generation disabled by config.", rewritten)
+        self.assertNotIn("ACTION: reprint this catalogue.", rewritten)
 
     def test_heartbeat_summary_lists_outputs(self):
         self.wrapper._DISCOVERED = [
